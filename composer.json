@@ -28,7 +28,7 @@
     "require": {
         "php": "^7.1",
         "squizlabs/php_codesniffer": "^2.8",
-        "slevomat/coding-standard": "dev-master"
+        "slevomat/coding-standard": "dev-master#47a8a32578 as 2.0.99"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0",

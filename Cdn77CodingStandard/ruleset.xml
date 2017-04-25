@@ -349,6 +349,7 @@
     <!-- enforce types to be written as natively if possible, forbids duplicated information in php doc etc. -->
     <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration">
         <properties>
+            <property name="enableEachParameterAndReturnInspection" value="true"/>
             <property name="traversableTypeHints" type="array" value="Doctrine\Common\Collections\Collection"/>
             <property
                 name="usefulAnnotations"

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<ruleset>
+    <file>Cdn77CodingStandard/</file>
+    <file>tests/</file>
+
+    <arg name="encoding" value="utf-8"/>
+    <arg value="s"/>
+    <arg value="p"/>
+
+    <exclude-pattern>tests/*/data/*</exclude-pattern>
+</ruleset>

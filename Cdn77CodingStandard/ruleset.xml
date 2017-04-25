@@ -467,4 +467,11 @@
             <property name="spacing" value="1"/>
         </properties>
     </rule>
+
+    <!-- enforce spaces around operators -->
+    <rule ref="Cdn77CodingStandard.WhiteSpace.OperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
 </ruleset>

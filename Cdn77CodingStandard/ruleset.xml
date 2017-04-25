@@ -460,4 +460,11 @@
             />
         </properties>
     </rule>
+
+    <!-- enforce one space between class methods -->
+    <rule ref="Cdn77CodingStandard.WhiteSpace.MethodSpacing">
+        <properties>
+            <property name="spacing" value="1"/>
+        </properties>
+    </rule>
 </ruleset>

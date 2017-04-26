@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<phpunit
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    beStrictAboutChangesToGlobalState="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTestsThatDoNotTestAnything="true"
+    beStrictAboutTodoAnnotatedTests="true"
+>
+    <php>
+        <ini name="error_reporting" value="-1"/>
+    </php>
+    <testsuites>
+        <testsuite name="CDN77 Coding Standard Tests Suite">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <log
+            type="coverage-text"
+            target="php://stdout"
+            showUncoveredFiles="true"
+            showOnlySummary="true"
+        />
+    </logging>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">Cdn77CodingStandard/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

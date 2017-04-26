@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="CDN77 Coding Standard" default="check">
+    <target
+        name="check"
+        depends="
+            lint,
+            cs,
+            tests
+        "
+    />
+    <target name="lint">
+        <exec
+            executable="vendor/bin/parallel-lint"
+            logoutput="true"
+            passthru="true"
+            checkreturn="true"
+        >
+            <arg path="Cdn77CodingStandard"/>
+            <arg path="tests"/>
+        </exec>
+    </target>
+    <target name="cs">
+        <exec
+            executable="vendor/bin/phpcs"
+            logoutput="true"
+            passthru="true"
+            checkreturn="true"
+        />
+    </target>
+    <target name="tests">
+        <exec
+            executable="vendor/bin/phpunit"
+            logoutput="true"
+            passthru="true"
+            checkreturn="true"
+        />
+    </target>
+</project>

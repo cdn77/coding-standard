@@ -316,39 +316,31 @@
         </properties>
     </rule>
 
-    <!-- Use some useful rules from Slevomat Coding Standard -->
+    <!-- Selectively use some useful rules from Slevomat Coding Standard -->
     <!-- https://github.com/slevomat/coding-standard -->
-    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard">
-        <exclude name="SlevomatCodingStandard.Files.TypeNameMatchesFileName"/>
-        <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameAfterKeyword"/>
-        <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation"/>
-        <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedExceptions"/>
-        <exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
-        <exclude name="Generic.Commenting.Todo"/>
-    </rule>
 
-    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/ReferenceUsedNamesOnlySniff.php">
         <properties>
             <property name="allowFullyQualifiedGlobalClasses" type="boolean" value="true"/>
             <property name="allowFullyQualifiedNameForCollidingClasses" type="boolean" value="true"/>
         </properties>
     </rule>
 
-    <rule ref="SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Types/EmptyLinesAroundTypeBracesSniff.php">
         <properties>
             <property name="linesCountAfterOpeningBrace" value="0"/>
             <property name="linesCountBeforeClosingBrace" value="0"/>
         </properties>
     </rule>
 
-    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/ReturnTypeHintSpacingSniff.php">
         <properties>
             <property name="spacesCountBeforeColon" value="1"/>
         </properties>
     </rule>
 
     <!-- enforce types to be written as natively if possible, forbids duplicated information in php doc etc. -->
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/TypeHintDeclarationSniff.php">
         <properties>
             <property name="enableEachParameterAndReturnInspection" value="true"/>
             <property name="traversableTypeHints" type="array" value="Doctrine\Common\Collections\Collection"/>
@@ -369,10 +361,10 @@
     </rule>
 
     <!-- enforce using Throwable instead of Exception -->
-    <rule ref="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Exceptions/ReferenceThrowableOnlySniff.php"/>
 
     <!-- enforce presence of declare(strict_types=1) -->
-    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/DeclareStrictTypesSniff.php">
         <properties>
             <property
                 name="newlinesCountBetweenOpenTagAndDeclare"
@@ -386,66 +378,66 @@
     </rule>
 
     <!-- forbid assignments in conditions -->
-    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/AssignmentInConditionSniff.php"/>
 
     <!-- forbid weak comparisons -->
-    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowEqualOperators"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/DisallowEqualOperatorsSniff.php"/>
 
     <!-- forbid dead code -->
-    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Classes/UnusedPrivateElementsSniff.php">
         <properties>
             <property name="alwaysUsedPropertiesAnnotations" type="array" value="@ORM\"/>
         </properties>
     </rule>
 
     <!-- forbid unused use statements -->
-    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UnusedUsesSniff.php">
         <properties>
             <property name="searchAnnotations" type="boolean" value="true"/>
         </properties>
     </rule>
 
     <!-- forbid useless uses of the same namespace -->
-    <rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UseFromSameNamespaceSniff.php"/>
 
     <!-- forbid useless unreachable catch blocks -->
-    <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Exceptions/DeadCatchSniff.php"/>
 
     <!-- enforce comma after last element in multi-line array -->
-    <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Arrays/TrailingArrayCommaSniff.php"/>
 
     <!-- forbid fancy yoda conditions -->
-    <rule ref="SlevomatCodingStandard.ControlStructures.YodaComparison"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/YodaComparisonSniff.php"/>
 
     <!-- enforce use statements to be alphabetically sorted -->
-    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/AlphabeticallySortedUsesSniff.php"/>
 
     <!-- enforce use of short versions of scalar types (i.e. int instead of integer) -->
-    <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/LongTypeHintsSniff.php"/>
 
     <!-- enforce presence of constant visibility (PHP 7.1+) -->
-    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Classes/ClassConstantVisibilitySniff.php"/>
 
     <!-- enforce ? when default value is null -->
-    <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/NullableTypeForNullDefaultValueSniff.php"/>
 
     <!-- enforce one space between typehint and variable, enforce no space between nullability sign and typehint -->
-    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/ParameterTypeHintSpacingSniff.php"/>
 
     <!-- forbid fancy group uses -->
-    <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/DisallowGroupUseSniff.php"/>
 
     <!-- forbid multiple use statements on same line -->
-    <rule ref="SlevomatCodingStandard.Namespaces.MultipleUsesPerLine"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/MultipleUsesPerLineSniff.php"/>
 
     <!-- forbid using absolute class names -->
-    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/ReferenceUsedNamesOnlySniff.php"/>
 
     <!-- forbid superfluous leading backslash in use statements -->
-    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UseDoesNotStartWithBackslashSniff.php"/>
 
     <!-- forbid useless annotations -->
-    <rule ref="SlevomatCodingStandard.Commenting.ForbiddenAnnotations">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Commenting/ForbiddenAnnotationsSniff.php">
         <properties>
             <property
                 name="forbiddenAnnotations"
@@ -462,6 +454,9 @@
             />
         </properties>
     </rule>
+
+    <!-- report invalid format of inline phpDocs with @var -->
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Commenting/InlineDocCommentDeclarationSniff.php"/>
 
     <!-- enforce one space between class methods -->
     <rule ref="Cdn77CodingStandard.WhiteSpace.MethodSpacing">

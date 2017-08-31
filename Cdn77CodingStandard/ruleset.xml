@@ -383,6 +383,9 @@
     <!-- forbid weak comparisons -->
     <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/DisallowEqualOperatorsSniff.php"/>
 
+    <!-- enforce language constructs without parentheses -->
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/LanguageConstructWithParenthesesSniff.php"/>
+
     <!-- forbid dead code -->
     <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Classes/UnusedPrivateElementsSniff.php">
         <properties>

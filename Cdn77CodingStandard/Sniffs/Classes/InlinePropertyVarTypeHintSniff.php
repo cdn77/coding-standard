@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Cdn77CodingStandard\Sniffs\Classes;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\DocCommentHelper;
 use SlevomatCodingStandard\Helpers\PropertyHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 
-class InlinePropertyVarTypeHintSniff implements \PHP_CodeSniffer_Sniff
+class InlinePropertyVarTypeHintSniff implements Sniff
 {
     public const CODE_MULTILINE_PROPERTY_COMMENT = 'MultiLinePropertyComment';
 
@@ -24,7 +26,7 @@ class InlinePropertyVarTypeHintSniff implements \PHP_CodeSniffer_Sniff
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param int $pointer
      */
-    public function process(\PHP_CodeSniffer_File $file, $pointer) : void
+    public function process(File $file, $pointer) : void
     {
         $tokens = $file->getTokens();
         $propertyPointer = TokenHelper::findNextEffective($file, $pointer + 1);

@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Cdn77CodingStandard\Sniffs\WhiteSpace;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 use SlevomatCodingStandard\Helpers\FunctionHelper;
 use SlevomatCodingStandard\Helpers\SniffSettingsHelper;
 
 /**
  * Decorates Squiz..WhiteSpace.FunctionSpacing to ignore spacing before first / after last class member.
  */
-class MethodSpacingSniff implements \PHP_CodeSniffer_Sniff
+class MethodSpacingSniff implements Sniff
 {
     public const CODE_INCORRECT_SPACING = 'IncorrectSpacing';
 
@@ -29,7 +32,7 @@ class MethodSpacingSniff implements \PHP_CodeSniffer_Sniff
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param int $pointer
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $pointer) : void
+    public function process(File $phpcsFile, $pointer) : void
     {
         if (!FunctionHelper::isMethod($phpcsFile, $pointer)) {
             return;
@@ -38,7 +41,7 @@ class MethodSpacingSniff implements \PHP_CodeSniffer_Sniff
         $this->processSpacing($phpcsFile, $pointer);
     }
 
-    private function processSpacing(\PHP_CodeSniffer_File $phpcsFile, int $pointer) : void
+    private function processSpacing(File $phpcsFile, int $pointer) : void
     {
         $tokens = $phpcsFile->getTokens();
         $spacing = SniffSettingsHelper::normalizeInteger($this->spacing);
@@ -60,7 +63,7 @@ class MethodSpacingSniff implements \PHP_CodeSniffer_Sniff
         );
         // find next non-empty token
         $nextNonEmptyTokenPointer = $phpcsFile->findNext(
-            \PHP_CodeSniffer_Tokens::$emptyTokens,
+            Tokens::$emptyTokens,
             $scopeClosingPointer + 1,
             null,
             true
@@ -72,7 +75,7 @@ class MethodSpacingSniff implements \PHP_CodeSniffer_Sniff
         }
 
         $nextMethodPointer = $phpcsFile->findNext(
-            array_merge(\PHP_CodeSniffer_Tokens::$emptyTokens, \PHP_CodeSniffer_Tokens::$methodPrefixes),
+            array_merge(Tokens::$emptyTokens, Tokens::$methodPrefixes),
             $nextNonEmptyTokenPointer,
             null,
             true
@@ -87,7 +90,7 @@ class MethodSpacingSniff implements \PHP_CodeSniffer_Sniff
 
         // ignore all lines with comments
         for ($i = $scopeClosingPointer + 1; $i <= $nextNonEmptyTokenPointer; $i++) {
-            if (!in_array($tokens[$i]['code'], \PHP_CodeSniffer_Tokens::$commentTokens, true)) {
+            if (!in_array($tokens[$i]['code'], Tokens::$commentTokens, true)) {
                 continue;
             }
 

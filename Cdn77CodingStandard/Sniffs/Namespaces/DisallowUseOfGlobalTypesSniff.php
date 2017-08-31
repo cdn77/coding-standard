@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Cdn77CodingStandard\Sniffs\Namespaces;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\UseStatementHelper;
 
-class DisallowUseOfGlobalTypesSniff implements \PHP_CodeSniffer_Sniff
+class DisallowUseOfGlobalTypesSniff implements Sniff
 {
     public const CODE_USE_CONTAINS_GLOBAL_TYPE = 'UseContainsGlobalType';
 
@@ -22,7 +24,7 @@ class DisallowUseOfGlobalTypesSniff implements \PHP_CodeSniffer_Sniff
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param int $pointer
      */
-    public function process(\PHP_CodeSniffer_File $file, $pointer) : void
+    public function process(File $file, $pointer) : void
     {
         if (
             UseStatementHelper::isTraitUse($file, $pointer)

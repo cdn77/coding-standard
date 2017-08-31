@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace Cdn77CodingStandard\Sniffs\WhiteSpace;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\OperatorSpacingSniff as BaseOperatorSpacingSniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 
 /**
  * Decorates Squiz.Sniffs.WhiteSpace_OperatorSpacing, but ignores declare(...).
  */
-class OperatorSpacingSniff implements \PHP_CodeSniffer_Sniff
+class OperatorSpacingSniff implements Sniff
 {
-    /** @var \Squiz_Sniffs_WhiteSpace_OperatorSpacingSniff */
+    /** @var BaseOperatorSpacingSniff */
     private $decoratedSniff;
 
     /** @var bool */
@@ -22,7 +25,7 @@ class OperatorSpacingSniff implements \PHP_CodeSniffer_Sniff
 
     public function __construct()
     {
-        $this->decoratedSniff = new \Squiz_Sniffs_WhiteSpace_OperatorSpacingSniff();
+        $this->decoratedSniff = new BaseOperatorSpacingSniff();
         $this->supportedTokenizers = &$this->decoratedSniff->supportedTokenizers;
         $this->ignoreNewlines = &$this->decoratedSniff->ignoreNewlines;
     }
@@ -39,7 +42,7 @@ class OperatorSpacingSniff implements \PHP_CodeSniffer_Sniff
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param int $pointer
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $pointer) : void
+    public function process(File $phpcsFile, $pointer) : void
     {
         if ($this->isDeclareStatement($phpcsFile, $pointer)) {
             return;
@@ -48,7 +51,7 @@ class OperatorSpacingSniff implements \PHP_CodeSniffer_Sniff
         $this->decoratedSniff->process($phpcsFile, $pointer);
     }
 
-    private function isDeclareStatement(\PHP_CodeSniffer_File $file, int $pointer) : bool
+    private function isDeclareStatement(File $file, int $pointer) : bool
     {
         $tokens = $file->getTokens();
 

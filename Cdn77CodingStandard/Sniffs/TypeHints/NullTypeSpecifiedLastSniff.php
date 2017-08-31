@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Cdn77CodingStandard\Sniffs\TypeHints;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 
-class NullTypeSpecifiedLastSniff implements \PHP_CodeSniffer_Sniff
+class NullTypeSpecifiedLastSniff implements Sniff
 {
     public const CODE_NULL_NOT_SPECIFIED_LAST = 'NullNotSpecifiedLast';
 
@@ -22,7 +24,7 @@ class NullTypeSpecifiedLastSniff implements \PHP_CodeSniffer_Sniff
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param int $pointer
      */
-    public function process(\PHP_CodeSniffer_File $file, $pointer) : void
+    public function process(File $file, $pointer) : void
     {
         $tokens = $file->getTokens();
         $annotationTagToken = $tokens[$pointer];
@@ -61,7 +63,7 @@ class NullTypeSpecifiedLastSniff implements \PHP_CodeSniffer_Sniff
         $this->validateTypeDeclaration($file, $pointer, $typeDeclaration);
     }
 
-    private function validateTypeDeclaration(\PHP_CodeSniffer_File $file, int $pointer, string $typeDeclaration) : void
+    private function validateTypeDeclaration(File $file, int $pointer, string $typeDeclaration) : void
     {
         $types = array_map('strtolower', explode('|', $typeDeclaration));
 

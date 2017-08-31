@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Cdn77CodingStandard\Sniffs\Classes;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 
 /**
@@ -16,7 +19,7 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
  *  - methods
  *  - magic methods
  */
-class ClassStructureSniff implements \PHP_CodeSniffer_Sniff
+class ClassStructureSniff implements Sniff
 {
     public const CODE_INVALID_MEMBER_PLACEMENT = 'InvalidMemberOrder';
 
@@ -41,7 +44,7 @@ class ClassStructureSniff implements \PHP_CodeSniffer_Sniff
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param int $pointer
      */
-    public function process(\PHP_CodeSniffer_File $file, $pointer) : void
+    public function process(File $file, $pointer) : void
     {
         $tokens = $file->getTokens();
         $rootScopeToken = $tokens[$pointer];
@@ -93,7 +96,7 @@ class ClassStructureSniff implements \PHP_CodeSniffer_Sniff
     /**
      * @return int|bool
      */
-    private function findNextElement(\PHP_CodeSniffer_File $file, int $pointer, int $boundary)
+    private function findNextElement(File $file, int $pointer, int $boundary)
     {
         return $file->findNext(
             [T_USE, T_CONST, T_VAR, T_PUBLIC, T_PROTECTED, T_PRIVATE, T_FUNCTION],
@@ -102,7 +105,7 @@ class ClassStructureSniff implements \PHP_CodeSniffer_Sniff
         );
     }
 
-    private function getStageForToken(\PHP_CodeSniffer_File $file, int $pointer) : ?int
+    private function getStageForToken(File $file, int $pointer) : ?int
     {
         $tokens = $file->getTokens();
 
@@ -129,7 +132,7 @@ class ClassStructureSniff implements \PHP_CodeSniffer_Sniff
             case T_PROTECTED:
             case T_PRIVATE:
             case T_VAR:
-                $nextToken = $file->findNext(\PHP_CodeSniffer_Tokens::$emptyTokens, $pointer + 1, null, true);
+                $nextToken = $file->findNext(Tokens::$emptyTokens, $pointer + 1, null, true);
                 if ($tokens[$nextToken]['code'] === T_VARIABLE) {
                     return self::STAGE_PROPERTIES;
                 }
@@ -139,7 +142,7 @@ class ClassStructureSniff implements \PHP_CodeSniffer_Sniff
         }
     }
 
-    private function getTokenCodeName(\PHP_CodeSniffer_File $file, int $pointer) : string
+    private function getTokenCodeName(File $file, int $pointer) : string
     {
         return [
             self::STAGE_USES => 'use',

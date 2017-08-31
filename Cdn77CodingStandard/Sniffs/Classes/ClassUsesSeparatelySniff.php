@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Cdn77CodingStandard\Sniffs\Classes;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\UseStatementHelper;
 
 /**
  * This sniff ensures that trait uses are written as separate statements.
  */
-class ClassUsesSeparatelySniff implements \PHP_CodeSniffer_Sniff
+class ClassUsesSeparatelySniff implements Sniff
 {
     public const CODE_MULTIPLE_USES_PER_LINE = 'MultipleUsesPerLine';
 
@@ -25,7 +27,7 @@ class ClassUsesSeparatelySniff implements \PHP_CodeSniffer_Sniff
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param int $pointer
      */
-    public function process(\PHP_CodeSniffer_File $file, $pointer) : void
+    public function process(File $file, $pointer) : void
     {
         $tokens = $file->getTokens();
         $rootScopeToken = $tokens[$pointer];

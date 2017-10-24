@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <ruleset>
-    <rule ref="Cdn77CodingStandard/ruleset.xml"/>
+    <rule ref="Cdn77CodingStandard"/>
 
     <file>Cdn77CodingStandard/</file>
     <file>tests/</file>

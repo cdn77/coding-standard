@@ -410,7 +410,7 @@
     <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Arrays/TrailingArrayCommaSniff.php"/>
 
     <!-- forbid fancy yoda conditions -->
-    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/YodaComparisonSniff.php"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/DisallowYodaComparisonSniff.php"/>
 
     <!-- enforce use statements to be alphabetically sorted -->
     <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/AlphabeticallySortedUsesSniff.php"/>

@@ -2,7 +2,7 @@
     "name": "cdn77/coding-standard",
     "description": "CDN77 Coding Standard.",
     "type": "phpcodesniffer-standard",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Michael Moravec",

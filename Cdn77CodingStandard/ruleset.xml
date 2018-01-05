@@ -384,6 +384,10 @@
                 name="spacesCountAroundEqualsSign"
                 value="0"
             />
+            <property
+                name="newlinesCountAfterDeclare"
+                value="2"
+            />
         </properties>
     </rule>
 

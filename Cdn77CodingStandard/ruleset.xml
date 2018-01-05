@@ -433,7 +433,11 @@
     <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
 
     <!-- enforce presence of constant visibility (PHP 7.1+) -->
-    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility"/>
+    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
+        <properties>
+            <property name="fixable" type="boolean" value="true"/>
+        </properties>
+    </rule>
 
     <!-- enforce ? when default value is null -->
     <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>

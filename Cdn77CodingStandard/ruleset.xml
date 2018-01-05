@@ -83,9 +83,6 @@
         </properties>
     </rule>
 
-    <!-- enforce scope changes to increase indentation -->
-    <rule ref="Generic.WhiteSpace.ScopeIndent"/>
-
     <!-- forbid Perl-style commends starting with # -->
     <rule ref="PEAR.Commenting.InlineComment"/>
 
@@ -111,6 +108,9 @@
 
         <!-- disable fancy alignment of values with opening brace -->
         <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned"/>
+
+        <!-- Checked by SlevomatCodingStandard.Arrays.TrailingArrayComma.MissingTrailingComma -->
+        <exclude name="Squiz.Arrays.ArrayDeclaration.NoCommaAfterLast"/>
     </rule>
 
     <!-- forbid class being in a file with different name -->
@@ -276,18 +276,6 @@
 
     <!-- forbid inline control structures, i.e. `if ($foo) bar();` -->
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
-
-    <!-- enforce trailing newline is present at EOF -->
-    <rule ref="Generic.Files.EndFileNewline"/>
-
-    <!-- forbid multiple classes per file -->
-    <rule ref="Generic.Files.OneClassPerFile"/>
-
-    <!-- forbid multiple interfaces per file -->
-    <rule ref="Generic.Files.OneInterfacePerFile"/>
-
-    <!-- forbid multiple traits per file -->
-    <rule ref="Generic.Files.OneTraitPerFile"/>
 
     <!-- forbid call-time pass by reference -->
     <rule ref="Generic.Functions.CallTimePassByReference"/>

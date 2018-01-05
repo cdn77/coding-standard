@@ -336,13 +336,35 @@
                 name="usefulAnnotations"
                 type="array"
                 value="
-                    @see,
-                    @deprecated,
-                    @internal,
+                    @after,
+                    @afterClass,
+                    @Attribute,
+                    @Attributes,
+                    @before,
+                    @beforeClass,
+                    @covers,
+                    @coversDefaultClass,
+                    @coversNothing,
                     @dataProvider,
+                    @depends,
+                    @deprecated,
+                    @Enum,
+                    @expectedDeprecation,
                     @expectedException,
+                    @expectedExceptionCode,
                     @expectedExceptionMessage,
-                    @expectedExceptionCode
+                    @expectedExceptionMessageRegExp,
+                    @group,
+                    @Groups,
+                    @IgnoreAnnotation,
+                    @internal,
+                    @link,
+                    @ORM\,
+                    @Required,
+                    @runInSeparateProcess,
+                    @runTestsInSeparateProcesses,
+                    @see,
+                    @Target
                 "
             />
         </properties>

@@ -311,6 +311,7 @@
         <properties>
             <property name="allowFullyQualifiedGlobalClasses" type="boolean" value="true"/>
             <property name="allowFullyQualifiedNameForCollidingClasses" type="boolean" value="true"/>
+            <property name="searchAnnotations" type="boolean" value="true"/>
         </properties>
     </rule>
 

@@ -10,18 +10,18 @@ class InlinePropertyVarTypeHintSniffTest extends TestCase
 {
     public function testNoErrors() : void
     {
-        $this->assertNoSniffErrorInFile($this->checkFile(__DIR__ . '/data/InlinePropertyVarTypeHintSniffNoErrors.php'));
+        self::assertNoSniffErrorInFile(self::checkFile(__DIR__ . '/data/InlinePropertyVarTypeHintSniffNoErrors.php'));
     }
 
     public function testErrors() : void
     {
-        $file = $this->checkFile(__DIR__ . '/data/InlinePropertyVarTypeHintSniffErrors.php');
+        $file = self::checkFile(__DIR__ . '/data/InlinePropertyVarTypeHintSniffErrors.php');
 
-        $this->assertSame(4, $file->getErrorCount());
+        self::assertSame(4, $file->getErrorCount());
 
-        $this->assertSniffError($file, 5, InlinePropertyVarTypeHintSniff::CODE_MULTILINE_PROPERTY_COMMENT);
-        $this->assertSniffError($file, 10, InlinePropertyVarTypeHintSniff::CODE_MULTILINE_PROPERTY_COMMENT);
-        $this->assertSniffError($file, 19, InlinePropertyVarTypeHintSniff::CODE_MULTILINE_PROPERTY_COMMENT);
-        $this->assertSniffError($file, 23, InlinePropertyVarTypeHintSniff::CODE_MULTILINE_PROPERTY_COMMENT);
+        self::assertSniffError($file, 5, InlinePropertyVarTypeHintSniff::CODE_MULTILINE_PROPERTY_COMMENT);
+        self::assertSniffError($file, 10, InlinePropertyVarTypeHintSniff::CODE_MULTILINE_PROPERTY_COMMENT);
+        self::assertSniffError($file, 19, InlinePropertyVarTypeHintSniff::CODE_MULTILINE_PROPERTY_COMMENT);
+        self::assertSniffError($file, 23, InlinePropertyVarTypeHintSniff::CODE_MULTILINE_PROPERTY_COMMENT);
     }
 }

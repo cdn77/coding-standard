@@ -10,16 +10,16 @@ class OperatorSpacingSniffTest extends TestCase
 {
     public function testNoErrors() : void
     {
-        $this->assertNoSniffErrorInFile($this->checkFile(__DIR__ . '/data/OperatorSpacingSniffNoErrors.php'));
+        self::assertNoSniffErrorInFile(self::checkFile(__DIR__ . '/data/OperatorSpacingSniffNoErrors.php'));
     }
 
     public function testErrors() : void
     {
-        $file = $this->checkFile(__DIR__ . '/data/OperatorSpacingSniffErrors.php');
+        $file = self::checkFile(__DIR__ . '/data/OperatorSpacingSniffErrors.php');
 
-        $this->assertSame(2, $file->getErrorCount());
+        self::assertSame(2, $file->getErrorCount());
 
-        $this->assertSniffError($file, 5, 'NoSpaceBefore');
-        $this->assertSniffError($file, 5, 'NoSpaceAfter');
+        self::assertSniffError($file, 5, 'NoSpaceBefore');
+        self::assertSniffError($file, 5, 'NoSpaceAfter');
     }
 }

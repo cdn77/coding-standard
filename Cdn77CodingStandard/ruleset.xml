@@ -539,4 +539,7 @@
 
     <!-- Require new instances with parentheses -->
     <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses"/>
+
+    <!-- Require usage of early exit instead of using else -->
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
 </ruleset>

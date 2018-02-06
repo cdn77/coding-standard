@@ -67,12 +67,14 @@ class NullTypeSpecifiedLastSniff implements Sniff
     {
         $types = array_map('strtolower', explode('|', $typeDeclaration));
 
-        if (in_array('null', $types, true) && $types[count($types) - 1] !== 'null') {
-            $file->addError(
-                'Null type must be specified as the last type.',
-                $pointer,
-                self::CODE_NULL_NOT_SPECIFIED_LAST
-            );
+        if (!in_array('null', $types, true) || $types[count($types) - 1] === 'null') {
+            return;
         }
+
+        $file->addError(
+            'Null type must be specified as the last type.',
+            $pointer,
+            self::CODE_NULL_NOT_SPECIFIED_LAST
+        );
     }
 }

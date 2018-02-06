@@ -102,12 +102,14 @@ class MethodSpacingSniff implements Sniff
             $linesDifference -= $tokens[$i]['line'] - $tokens[$i - 1]['line'];
         }
 
-        if ($linesDifference - 1 !== $spacing) {
-            $phpcsFile->addError(
-                sprintf('There must be exactly %d spaces between functions.', $spacing),
-                $scopeClosingPointer,
-                self::CODE_INCORRECT_SPACING
-            );
+        if ($linesDifference - 1 === $spacing) {
+            return;
         }
+
+        $phpcsFile->addError(
+            sprintf('There must be exactly %d spaces between functions.', $spacing),
+            $scopeClosingPointer,
+            self::CODE_INCORRECT_SPACING
+        );
     }
 }

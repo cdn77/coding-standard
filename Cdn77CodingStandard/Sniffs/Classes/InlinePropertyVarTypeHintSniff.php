@@ -78,20 +78,24 @@ class InlinePropertyVarTypeHintSniff implements Sniff
             );
 
             // we found a string or something that is probably meaningful
-            if ($nextEffectivePointer !== null) {
-                return;
+            if ($nextEffectivePointer === null) {
+                continue;
             }
+
+            return;
         }
 
-        if ($tokens[$docCommentEndPointer]['line'] - $tokens[$docCommentStartPointer]['line'] !== 0) {
-            $file->addError(
-                sprintf(
-                    'Found multi-line comment for property %s, use one-line instead.',
-                    PropertyHelper::getFullyQualifiedName($file, $propertyPointer)
-                ),
-                $docCommentStartPointer,
-                self::CODE_MULTILINE_PROPERTY_COMMENT
-            );
+        if ($tokens[$docCommentEndPointer]['line'] - $tokens[$docCommentStartPointer]['line'] === 0) {
+            return;
         }
+
+        $file->addError(
+            sprintf(
+                'Found multi-line comment for property %s, use one-line instead.',
+                PropertyHelper::getFullyQualifiedName($file, $propertyPointer)
+            ),
+            $docCommentStartPointer,
+            self::CODE_MULTILINE_PROPERTY_COMMENT
+        );
     }
 }

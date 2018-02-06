@@ -35,12 +35,14 @@ class DisallowUseOfGlobalTypesSniff implements Sniff
 
         $name = UseStatementHelper::getFullyQualifiedTypeNameFromUse($file, $pointer);
 
-        if (strpos(ltrim($name, '\\'), '\\') === false) {
-            $file->addError(
-                'Use of global types is forbidden, reference it directly using FQCN.',
-                $pointer,
-                self::CODE_USE_CONTAINS_GLOBAL_TYPE
-            );
+        if (strpos(ltrim($name, '\\'), '\\') !== false) {
+            return;
         }
+
+        $file->addError(
+            'Use of global types is forbidden, reference it directly using FQCN.',
+            $pointer,
+            self::CODE_USE_CONTAINS_GLOBAL_TYPE
+        );
     }
 }

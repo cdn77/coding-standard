@@ -21,9 +21,9 @@
     },
     "require": {
         "php": "^7.1",
-        "slevomat/coding-standard": "4.2.1",
+        "slevomat/coding-standard": "4.4.0",
         "squizlabs/php_codesniffer": "^3.2",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4"
     },
     "require-dev": {
         "jakub-onderka/php-parallel-lint": "^0.9.2",

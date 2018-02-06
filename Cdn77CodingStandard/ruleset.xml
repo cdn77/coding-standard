@@ -492,4 +492,18 @@
             <property name="ignoreNewlines" value="true"/>
         </properties>
     </rule>
+
+    <!-- Forbid useless comments -->
+    <rule ref="SlevomatCodingStandard.Commenting.ForbiddenComments">
+        <properties>
+            <property
+                name="forbiddenCommentPatterns"
+                type="array"
+                value="
+                    ~^(?:(?!private|protected|static)\S+ )?(?:con|de)structor\.\z~i,
+                    ~^Created by \S+\.\z~i,
+                    ~^\S+ [gs]etter\.\z~i,
+                " />
+            </properties>
+    </rule>
 </ruleset>

@@ -22,21 +22,32 @@ script: ./vendor/bin/phpunit
 jobs:
   allow_failures:
     - php: nightly
+    - env: DEV_DEPENDENCIES
 
   include:
-    - stage: Test (lowest deps)
+    - stage: Test
+      env: LOWEST_DEPENDENCIES
       install:
         - travis_retry composer update -n --prefer-lowest
 
-    - stage: Test (lowest deps)
+    - stage: Test
+      env: LOWEST_DEPENDENCIES
       php: 7.2
       install:
         - travis_retry composer update -n --prefer-lowest
 
-    - stage: Test (lowest deps)
+    - stage: Test
+      env: LOWEST_DEPENDENCIES
       php: nightly
       install:
         - travis_retry composer update -n --prefer-lowest
+
+    - stage: Test
+      env: DEV_DEPENDENCIES
+      php: nightly
+      install:
+        - composer config minimum-stability dev
+        - travis_retry composer update -n
 
     - stage: Coding standard
       script:

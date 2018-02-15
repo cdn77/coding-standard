@@ -335,6 +335,8 @@
 
     <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
         <properties>
+            <property name="allowFallbackGlobalConstants" type="boolean" value="false"/>
+            <property name="allowFallbackGlobalFunctions" type="boolean" value="false"/>
             <property name="allowFullyQualifiedGlobalClasses" type="boolean" value="true"/>
             <property name="allowFullyQualifiedGlobalConstants" type="boolean" value="false"/>
             <property name="allowFullyQualifiedGlobalFunctions" type="boolean" value="false"/>
@@ -343,6 +345,10 @@
             <property name="allowFullyQualifiedNameForCollidingFunctions" type="boolean" value="true"/>
             <property name="searchAnnotations" type="boolean" value="true"/>
         </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName">
+        <severity>0</severity>
     </rule>
 
     <rule ref="SlevomatCodingStandard.Types.EmptyLinesAroundTypeBraces">

@@ -12,6 +12,10 @@
 
     <rule ref="Cdn77CodingStandard"/>
 
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName">
+        <severity>5</severity>
+    </rule>
+
     <file>Cdn77CodingStandard/</file>
     <file>tests/</file>
 

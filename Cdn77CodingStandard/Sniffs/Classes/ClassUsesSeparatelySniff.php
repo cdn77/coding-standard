@@ -7,6 +7,12 @@ namespace Cdn77CodingStandard\Sniffs\Classes;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\UseStatementHelper;
+use const T_ANON_CLASS;
+use const T_CLASS;
+use const T_COMMA;
+use const T_SEMICOLON;
+use const T_TRAIT;
+use const T_USE;
 
 /**
  * This sniff ensures that trait uses are written as separate statements.

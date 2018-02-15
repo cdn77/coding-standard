@@ -8,6 +8,17 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 use SlevomatCodingStandard\Helpers\TokenHelper;
+use const T_CONST;
+use const T_FUNCTION;
+use const T_PRIVATE;
+use const T_PROTECTED;
+use const T_PUBLIC;
+use const T_STRING;
+use const T_USE;
+use const T_VAR;
+use const T_VARIABLE;
+use function sprintf;
+use function strtolower;
 
 /**
  * This sniff ensures that the class/interface/trait has consistent order of its members in this exact order:

@@ -7,6 +7,14 @@ namespace Cdn77CodingStandard\Sniffs\TypeHints;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
+use const T_DOC_COMMENT_STRING;
+use const T_DOC_COMMENT_TAG;
+use const T_DOC_COMMENT_WHITESPACE;
+use function array_map;
+use function count;
+use function explode;
+use function in_array;
+use function preg_split;
 
 class NullTypeSpecifiedLastSniff implements Sniff
 {

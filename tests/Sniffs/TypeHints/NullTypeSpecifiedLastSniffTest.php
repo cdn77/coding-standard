@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cdn77CodingStandard\Sniffs\TypeHints;
 
 use Cdn77CodingStandard\Sniffs\TestCase;
+use function count;
 
 class NullTypeSpecifiedLastSniffTest extends TestCase
 {

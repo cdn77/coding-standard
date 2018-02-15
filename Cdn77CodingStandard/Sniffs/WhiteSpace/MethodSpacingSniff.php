@@ -9,6 +9,13 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 use SlevomatCodingStandard\Helpers\FunctionHelper;
 use SlevomatCodingStandard\Helpers\SniffSettingsHelper;
+use const T_CLOSE_CURLY_BRACKET;
+use const T_FUNCTION;
+use const T_SEMICOLON;
+use const T_WHITESPACE;
+use function array_merge;
+use function in_array;
+use function sprintf;
 
 /**
  * Decorates Squiz..WhiteSpace.FunctionSpacing to ignore spacing before first / after last class member.

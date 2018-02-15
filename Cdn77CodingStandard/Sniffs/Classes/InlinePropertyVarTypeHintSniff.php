@@ -9,6 +9,16 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\DocCommentHelper;
 use SlevomatCodingStandard\Helpers\PropertyHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
+use const T_DOC_COMMENT_CLOSE_TAG;
+use const T_DOC_COMMENT_STAR;
+use const T_DOC_COMMENT_TAG;
+use const T_DOC_COMMENT_WHITESPACE;
+use const T_PRIVATE;
+use const T_PROTECTED;
+use const T_PUBLIC;
+use const T_VAR;
+use const T_VARIABLE;
+use function sprintf;
 
 class InlinePropertyVarTypeHintSniff implements Sniff
 {

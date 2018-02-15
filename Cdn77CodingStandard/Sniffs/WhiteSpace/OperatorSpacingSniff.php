@@ -8,6 +8,10 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\OperatorSpacingSniff as BaseOperatorSpacingSniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
+use const T_DECLARE;
+use const T_EQUAL;
+use const T_OPEN_PARENTHESIS;
+use const T_STRING;
 
 /**
  * Decorates Squiz.Sniffs.WhiteSpace_OperatorSpacing, but ignores declare(...).

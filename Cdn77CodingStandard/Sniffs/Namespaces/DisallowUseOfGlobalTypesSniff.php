@@ -8,6 +8,10 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use SlevomatCodingStandard\Helpers\UseStatementHelper;
+use const T_USE;
+use function ltrim;
+use function strpos;
+use function strtolower;
 
 class DisallowUseOfGlobalTypesSniff implements Sniff
 {

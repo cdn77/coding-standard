@@ -15,7 +15,7 @@ before_install:
   - mv ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini{,.disabled} || echo "xdebug not available"
 
 install:
-  - travis_retry composer install -n
+  - travis_retry composer update -n --prefer-dist
 
 script: ./vendor/bin/phpunit
 
@@ -28,26 +28,26 @@ jobs:
     - stage: Test
       env: LOWEST_DEPENDENCIES
       install:
-        - travis_retry composer update -n --prefer-lowest
+        - travis_retry composer update -n --prefer-dist --prefer-lowest
 
     - stage: Test
       env: LOWEST_DEPENDENCIES
       php: 7.2
       install:
-        - travis_retry composer update -n --prefer-lowest
+        - travis_retry composer update -n --prefer-dist --prefer-lowest
 
     - stage: Test
       env: LOWEST_DEPENDENCIES
       php: nightly
       install:
-        - travis_retry composer update -n --prefer-lowest
+        - travis_retry composer update -n --prefer-dist --prefer-lowest
 
     - stage: Test
       env: DEV_DEPENDENCIES
       php: nightly
       install:
         - composer config minimum-stability dev
-        - travis_retry composer update -n
+        - travis_retry composer update -n --prefer-dist
 
     - stage: Coding standard
       script:

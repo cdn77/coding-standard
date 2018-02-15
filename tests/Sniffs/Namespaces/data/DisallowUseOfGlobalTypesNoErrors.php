@@ -4,6 +4,8 @@ namespace Xyz;
 
 use Foo\Bar;
 use Foo\Bar\Baz;
+use const PHP_EOL;
+use function strlen;
 
 use function Foo\f;
 use function Foo\Bar\g;

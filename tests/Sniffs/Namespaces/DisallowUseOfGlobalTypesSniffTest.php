@@ -17,14 +17,9 @@ class DisallowUseOfGlobalTypesSniffTest extends TestCase
     {
         $file = self::checkFile(__DIR__ . '/data/DisallowUseOfGlobalTypesErrors.php');
 
-        self::assertSame(6, $file->getErrorCount());
+        self::assertSame(2, $file->getErrorCount());
 
         self::assertSniffError($file, 5, DisallowUseOfGlobalTypesSniff::CODE_USE_CONTAINS_GLOBAL_TYPE);
         self::assertSniffError($file, 6, DisallowUseOfGlobalTypesSniff::CODE_USE_CONTAINS_GLOBAL_TYPE);
-        self::assertSniffError($file, 7, DisallowUseOfGlobalTypesSniff::CODE_USE_CONTAINS_GLOBAL_TYPE);
-
-        self::assertSniffError($file, 9, DisallowUseOfGlobalTypesSniff::CODE_USE_CONTAINS_GLOBAL_TYPE);
-        self::assertSniffError($file, 10, DisallowUseOfGlobalTypesSniff::CODE_USE_CONTAINS_GLOBAL_TYPE);
-        self::assertSniffError($file, 11, DisallowUseOfGlobalTypesSniff::CODE_USE_CONTAINS_GLOBAL_TYPE);
     }
 }

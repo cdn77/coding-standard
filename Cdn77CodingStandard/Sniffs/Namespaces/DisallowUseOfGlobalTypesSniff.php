@@ -6,6 +6,7 @@ namespace Cdn77CodingStandard\Sniffs\Namespaces;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use SlevomatCodingStandard\Helpers\TokenHelper;
 use SlevomatCodingStandard\Helpers\UseStatementHelper;
 
 class DisallowUseOfGlobalTypesSniff implements Sniff
@@ -30,6 +31,12 @@ class DisallowUseOfGlobalTypesSniff implements Sniff
             UseStatementHelper::isTraitUse($file, $pointer)
             || UseStatementHelper::isAnonymousFunctionUse($file, $pointer)
         ) {
+            return;
+        }
+
+        $nextElement = strtolower($file->getTokens()[TokenHelper::findNextEffective($file, $pointer + 1)]['content']);
+
+        if ($nextElement === 'function' || $nextElement === 'const') {
             return;
         }
 

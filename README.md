@@ -12,7 +12,7 @@ PHP 7.1+ coding standard based on PSR-2, enhanced by [advanced sniffs from Slevo
 Cdn77CodingStandard.Sniffs.Classes.ClassesClassStructure | Ensures that the class/interface/trait has consistent order of its members in exact order.
 Cdn77CodingStandard.Sniffs.Classes.ClassUsesSeparately | Forbids group `use`.
 Cdn77CodingStandard.Sniffs.Classes.InlinePropertyVarTypeHint | Enforces one-line `@var` annotation when no other information is present.
-Cdn77CodingStandard.Sniffs.Namespaces.DisallowUseOfGlobalTypes | Forbids `use` of global types in favor of direct references.
+Cdn77CodingStandard.Sniffs.Namespaces.DisallowUseOfGlobalTypes | Forbids `use` of global classes/interfaces/traits in favor of direct FCQN references.
 Cdn77CodingStandard.Sniffs.TypeHints.NullTypeSpecifiedLast | Requires `null` to be specified as last type in annotations, i.e. `string|null` instead of `null|string`.
 Cdn77CodingStandard.Sniffs.WhiteSpace.MethodSpacing | Requires exactly N lines between methods, as configured.
 Cdn77CodingStandard.Sniffs.WhiteSpace.OperatorSpacing | Requires space around operators, but excludes declare.

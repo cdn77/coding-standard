@@ -16,6 +16,10 @@
         <severity>5</severity>
     </rule>
 
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit">
+        <severity>5</severity>
+    </rule>
+
     <file>Cdn77CodingStandard/</file>
     <file>tests/</file>
 

@@ -551,5 +551,7 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses"/>
 
     <!-- Require usage of early exit instead of using else -->
-    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit">
+        <severity>0</severity>
+    </rule>
 </ruleset>

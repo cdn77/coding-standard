@@ -20,6 +20,13 @@
         <severity>5</severity>
     </rule>
 
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="120"/>
+        </properties>
+    </rule>
+
     <file>Cdn77CodingStandard/</file>
     <file>tests/</file>
 

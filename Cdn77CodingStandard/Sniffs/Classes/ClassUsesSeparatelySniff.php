@@ -54,7 +54,6 @@ class ClassUsesSeparatelySniff implements Sniff
             if (
                 $useToken['level'] - $tokens[$rootScopeOpenerPointer]['level'] !== 1
                 || !UseStatementHelper::isTraitUse($file, $useTokenPointer)
-                || UseStatementHelper::isAnonymousFunctionUse($file, $useTokenPointer)
             ) {
                 $currentPointer++;
                 continue;

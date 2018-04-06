@@ -19,16 +19,12 @@ final class SingleLineMethodDeclarationWhenPossibleSniffTest extends TestCase
         $file = self::checkFile(__DIR__ . '/data/SingleLineMethodDeclarationWhenPossibleSniffErrors.php');
         self::assertSame(4, $file->getErrorCount());
 
-        $errors = $file->getErrors();
-        self::assertSame('Method "someMethod" can be placed on a single line.', $errors[5][12][0]['message']);
-        self::assertSame(
-            'Method "someMethodWithNoReturnType" can be placed on a single line.',
-            $errors[11][12][0]['message']
-        );
-        self::assertSame('Method "someMethod" can be placed on a single line.', $errors[20][12][0]['message']);
-        self::assertSame(
-            'Method "someMethodWithNoReturnType" can be placed on a single line.',
-            $errors[25][12][0]['message']
-        );
+        $code = SingleLineMethodDeclarationWhenPossibleSniff::CODE_UNNECESSARY_MULTI_LINE_METHOD;
+        self::assertSniffError($file, 5, $code);
+        self::assertSniffError($file, 11, $code);
+        self::assertSniffError($file, 20, $code);
+        self::assertSniffError($file, 25, $code);
+
+        $this->assertAllFixedInFile($file);
     }
 }

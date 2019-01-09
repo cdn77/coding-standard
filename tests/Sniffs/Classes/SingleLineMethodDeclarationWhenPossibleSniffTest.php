@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Cdn77CodingStandard\Sniffs\Classes;
+namespace Cdn77CodingStandard\Tests\Sniffs\Classes;
 
-use Cdn77CodingStandard\Sniffs\TestCase;
+use Cdn77CodingStandard\Sniffs\Classes\SingleLineMethodDeclarationWhenPossibleSniff;
+use Cdn77CodingStandard\Tests\TestCase;
 
 final class SingleLineMethodDeclarationWhenPossibleSniffTest extends TestCase
 {
@@ -25,6 +26,6 @@ final class SingleLineMethodDeclarationWhenPossibleSniffTest extends TestCase
         self::assertSniffError($file, 20, $code);
         self::assertSniffError($file, 25, $code);
 
-        $this->assertAllFixedInFile($file);
+        self::assertAllFixedInFile($file);
     }
 }

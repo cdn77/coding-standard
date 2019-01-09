@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<ruleset
+    name="Cdn77"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../vendor/squizlabs/php_codesniffer/phpcs.xsd"
+>
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="16"/>
+    <arg name="colors"/>
+    <arg name="encoding" value="utf-8"/>
+    <arg value="n"/>
+    <arg value="s"/>
+
+    <!-- use Doctrine as the base standard -->
+    <rule ref="Doctrine">
+        <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
+        <exclude name="Generic.Formatting.SpaceAfterNot"/>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+    </rule>
+
+    <!-- compatibility with PSR-12 and JetBrains defaults -->
+    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses">
+        <properties>
+            <property name="psr12Compatible" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
+        <properties>
+            <property name="alwaysUsedPropertiesAnnotations" type="array"
+                      value="
+                      @ORM\Column,
+                      @ORM\Embedded,
+                      @ORM\OneToOne,
+                      @ORM\OneToMany,
+                      @ORM\ManyToOne,
+                      @ORM\ManyToMany
+                    "
+            />
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration">
+        <properties>
+            <property
+                name="usefulAnnotations"
+                type="array"
+                extend="true"
+                value="
+                    @codeCoverageIgnoreStart,
+                    @codeCoverageIgnoreEnd,
+                    @phpcsSuppress,
+                    @Rest\,
+                    @Route
+                "
+            />
+        </properties>
+    </rule>
+</ruleset>

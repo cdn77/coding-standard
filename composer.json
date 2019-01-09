@@ -1,33 +1,29 @@
 {
     "name": "cdn77/coding-standard",
-    "description": "CDN77 Coding Standard.",
+    "description": "Cdn77 Coding Standard.",
     "type": "phpcodesniffer-standard",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Michael Moravec",
-            "email": "michael@cdn77.com"
-        }
-    ],
     "autoload": {
         "psr-4": {
-            "Cdn77CodingStandard\\": "Cdn77CodingStandard/"
+            "Cdn77CodingStandard\\": "src/Cdn77"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Cdn77CodingStandard\\": "tests/"
+            "Cdn77CodingStandard\\Tests\\": "tests/"
         }
     },
     "require": {
         "php": "^7.1",
-        "slevomat/coding-standard": "^4.4.6",
-        "squizlabs/php_codesniffer": "^3.2",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
+        "doctrine/coding-standard": "5.0",
+        "squizlabs/php_codesniffer": "^3.4.0"
     },
     "require-dev": {
-        "jakub-onderka/php-parallel-lint": "^0.9.2",
-        "phing/phing": "^2.16",
+        "jakub-onderka/php-parallel-lint": "^1.0",
+        "phpstan/phpstan": "^0.10.8",
+        "phpstan/phpstan-phpunit": "^0.10.0",
+        "phpstan/phpstan-strict-rules": "^0.10.1",
         "phpunit/phpunit": "^7.0"
     },
     "config": {

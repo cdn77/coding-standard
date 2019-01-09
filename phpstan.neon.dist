@@ -1,0 +1,13 @@
+parameters:
+    bootstrap: %currentWorkingDirectory%/tests/bootstrap.php
+    memory-limit: -1
+    level: max
+    excludes_analyse:
+        - %currentWorkingDirectory%/tests/*/data/*
+        - %currentWorkingDirectory%/vendor
+    paths:
+        - %currentWorkingDirectory%
+
+includes:
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon

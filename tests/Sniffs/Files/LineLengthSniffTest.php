@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Cdn77CodingStandard\Sniffs\Files;
+namespace Cdn77CodingStandard\Tests\Sniffs\Files;
 
-use Cdn77CodingStandard\Sniffs\TestCase;
+use Cdn77CodingStandard\Sniffs\Files\LineLengthSniff;
+use Cdn77CodingStandard\Tests\TestCase;
 
 class LineLengthSniffTest extends TestCase
 {

@@ -39,3 +39,9 @@ interface B
         \DateTimeImmutable $andAnotherLongNameOverThere
     );
 }
+
+function thisSniffOnlyAppliesToMethodsSoFunctionShouldBeIgnored(
+    \DateTimeImmutable $someLongNameHere,
+    \DateTimeImmutable $andAnotherLongNameOverThere
+) : void {
+}

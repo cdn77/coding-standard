@@ -1,33 +1,19 @@
 <?xml version="1.0"?>
 <phpunit
-    bootstrap="tests/bootstrap.php"
-    colors="true"
-    backupGlobals="false"
-    backupStaticAttributes="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
     beStrictAboutChangesToGlobalState="true"
     beStrictAboutOutputDuringTests="true"
-    beStrictAboutTestsThatDoNotTestAnything="true"
     beStrictAboutTodoAnnotatedTests="true"
+    colors="true"
+    bootstrap="tests/bootstrap.php"
 >
-    <php>
-        <ini name="error_reporting" value="-1"/>
-    </php>
-    <testsuites>
-        <testsuite name="CDN77 Coding Standard Tests Suite">
-            <directory>tests/</directory>
-        </testsuite>
-    </testsuites>
-    <logging>
-        <log
-            type="coverage-text"
-            target="php://stdout"
-            showUncoveredFiles="true"
-            showOnlySummary="true"
-        />
-    </logging>
+    <testsuite name="Cdn77 Coding Standard">
+        <directory>tests</directory>
+    </testsuite>
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">Cdn77CodingStandard/</directory>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
 </phpunit>

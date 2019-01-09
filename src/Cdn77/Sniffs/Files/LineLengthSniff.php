@@ -6,17 +6,16 @@ namespace Cdn77CodingStandard\Sniffs\Files;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use PHP_CodeSniffer\Util\Tokens;
 use SlevomatCodingStandard\Helpers\UseStatementHelper;
+use function in_array;
+use function is_int;
+use function ltrim;
+use function strlen;
+use function strrpos;
 use const T_COMMENT;
 use const T_DOC_COMMENT_STRING;
 use const T_OPEN_TAG;
 use const T_USE;
-use const T_WHITESPACE;
-use function in_array;
-use function ltrim;
-use function strlen;
-use function strrpos;
 
 class LineLengthSniff implements Sniff
 {
@@ -52,13 +51,14 @@ class LineLengthSniff implements Sniff
     }
 
     /**
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param int $pointer
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
     public function process(File $file, $pointer) : int
     {
         $tokens = $file->getTokens();
-        for ($i = 1; $i < $file->numTokens; $i++) {
+        for ($i = 0; $i < $file->numTokens; $i++) {
             if ($tokens[$i]['column'] !== 1) {
                 continue;
             }
@@ -66,9 +66,6 @@ class LineLengthSniff implements Sniff
             $this->checkLineLength($file, $tokens, $i);
         }
 
-        $this->checkLineLength($file, $tokens, $i);
-
-        // Ignore the rest of the file.
         return $file->numTokens + 1;
     }
 
@@ -77,24 +74,20 @@ class LineLengthSniff implements Sniff
      */
     private function checkLineLength(File $file, array $tokens, int $pointer) : void
     {
-        // The passed token is the first on the line.
-        $pointer--;
-
         if ($tokens[$pointer]['column'] === 1 && $tokens[$pointer]['length'] === 0) {
             // Blank line.
             return;
         }
 
-        if ($tokens[$pointer]['column'] !== 1 && $tokens[$pointer]['content'] === $file->eolChar) {
-            $pointer--;
+        $line = $tokens[$pointer]['line'];
+        $nextLineStartPtr = $pointer;
+        while (isset($tokens[$nextLineStartPtr]) && $line === $tokens[$nextLineStartPtr]['line']) {
+            $pointer = $nextLineStartPtr;
+            $nextLineStartPtr++;
         }
 
-        if (isset(Tokens::$phpcsCommentTokens[$tokens[$pointer]['code']]) === true) {
-            $prevNonWhiteSpace = $file->findPrevious(T_WHITESPACE, $pointer - 1, null, true);
-            if ($tokens[$pointer]['line'] !== $tokens[$prevNonWhiteSpace]['line']) {
-                // Ignore PHPCS annotation comments if they are on a line by themselves.
-                return;
-            }
+        if ($tokens[$pointer]['content'] === $file->eolChar) {
+            $pointer--;
         }
 
         $lineLength = $tokens[$pointer]['column'] + $tokens[$pointer]['length'] - 1;
@@ -131,7 +124,7 @@ class LineLengthSniff implements Sniff
 
         if ($this->ignoreImports) {
             $usePointer = $file->findPrevious(T_USE, $pointer - 1);
-            if ($usePointer !== false
+            if (is_int($usePointer)
                 && $tokens[$usePointer]['line'] === $tokens[$pointer]['line']
                 && !UseStatementHelper::isTraitUse($file, $usePointer)) {
                 return;

@@ -8,16 +8,19 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\FunctionHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
-use const T_FUNCTION;
-use const T_OPEN_CURLY_BRACKET;
-use const T_SEMICOLON;
-use const T_WHITESPACE;
+use function assert;
 use function in_array;
+use function is_int;
+use function is_string;
 use function preg_replace;
 use function rtrim;
 use function sprintf;
 use function str_replace;
 use function strlen;
+use const T_FUNCTION;
+use const T_OPEN_CURLY_BRACKET;
+use const T_SEMICOLON;
+use const T_WHITESPACE;
 
 class SingleLineMethodDeclarationWhenPossibleSniff implements Sniff
 {
@@ -36,6 +39,7 @@ class SingleLineMethodDeclarationWhenPossibleSniff implements Sniff
 
     /**
      * @param int $pointer
+     *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
     public function process(File $file, $pointer) : void
@@ -47,7 +51,10 @@ class SingleLineMethodDeclarationWhenPossibleSniff implements Sniff
         $tokens = $file->getTokens();
 
         $lineStartPtr = $file->findFirstOnLine(T_WHITESPACE, $pointer);
+        assert(is_int($lineStartPtr));
+
         $methodDeclarationEndPtr = $file->findNext([T_OPEN_CURLY_BRACKET, T_SEMICOLON], $pointer);
+        assert(is_int($methodDeclarationEndPtr));
 
         $declarationEndLine = $tokens[$methodDeclarationEndPtr]['line'];
         if (in_array($tokens[$lineStartPtr]['line'], [$declarationEndLine, $declarationEndLine - 1], true)) {
@@ -56,6 +63,8 @@ class SingleLineMethodDeclarationWhenPossibleSniff implements Sniff
 
         $methodDeclaration = TokenHelper::getContent($file, $lineStartPtr, $methodDeclarationEndPtr - 1);
         $methodDeclaration = preg_replace('~\n +~', ' ', $methodDeclaration);
+        assert(is_string($methodDeclaration));
+
         $methodDeclaration = str_replace(['( ', ' )'], ['(', ')'], $methodDeclaration);
         $methodDeclaration = rtrim($methodDeclaration);
 

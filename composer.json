@@ -16,7 +16,7 @@
     "require": {
         "php": "^7.1",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
-        "doctrine/coding-standard": "5.0",
+        "doctrine/coding-standard": "^5.0",
         "squizlabs/php_codesniffer": "^3.4.0"
     },
     "require-dev": {

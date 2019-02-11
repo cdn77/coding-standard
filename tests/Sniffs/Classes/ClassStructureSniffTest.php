@@ -65,6 +65,8 @@ class ClassStructureSniffTest extends TestCase
         self::assertSniffError($file, 175, ClassStructureSniff::CODE_INVALID_MEMBER_PLACEMENT);
         self::assertSniffError($file, 179, ClassStructureSniff::CODE_INVALID_MEMBER_PLACEMENT);
         self::assertSniffError($file, 186, ClassStructureSniff::CODE_INVALID_MEMBER_PLACEMENT);
+
+        self::assertAllFixedInFile($file);
     }
 
     public function testNoErrorsWithDifferentRules() : void
@@ -98,5 +100,7 @@ class ClassStructureSniffTest extends TestCase
         self::assertSniffError($file, 94, ClassStructureSniff::CODE_INVALID_MEMBER_PLACEMENT);
         self::assertSniffError($file, 103, ClassStructureSniff::CODE_INVALID_MEMBER_PLACEMENT);
         self::assertSniffError($file, 107, ClassStructureSniff::CODE_INVALID_MEMBER_PLACEMENT);
+
+        self::assertAllFixedInFile($file);
     }
 }

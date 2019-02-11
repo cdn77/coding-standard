@@ -7,30 +7,37 @@ namespace Cdn77CodingStandard\Sniffs\Classes;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
+use RuntimeException;
 use SlevomatCodingStandard\Helpers\ClassHelper;
+use SlevomatCodingStandard\Helpers\DocCommentHelper;
 use SlevomatCodingStandard\Helpers\FunctionHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_key_exists;
 use function array_merge;
-use function assert;
 use function in_array;
-use function is_int;
+use function is_bool;
 use function sprintf;
+use function str_repeat;
 use function strtolower;
 use const T_ABSTRACT;
 use const T_CLOSE_CURLY_BRACKET;
+use const T_COMMENT;
 use const T_CONST;
+use const T_DOC_COMMENT;
+use const T_DOC_COMMENT_WHITESPACE;
 use const T_FINAL;
 use const T_FUNCTION;
 use const T_OPEN_CURLY_BRACKET;
 use const T_PRIVATE;
 use const T_PROTECTED;
 use const T_PUBLIC;
+use const T_SEMICOLON;
 use const T_STATIC;
 use const T_STRING;
 use const T_USE;
 use const T_VAR;
 use const T_VARIABLE;
+use const T_WHITESPACE;
 
 /**
  * This sniff ensures that the class/interface/trait has consistent order of its members.
@@ -141,7 +148,7 @@ class ClassStructureSniff implements Sniff
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
-    public function process(File $file, $pointer) : void
+    public function process(File $file, $pointer) : int
     {
         $tokens = $file->getTokens();
         $rootScopeToken = $tokens[$pointer];
@@ -154,11 +161,9 @@ class ClassStructureSniff implements Sniff
         $expectedStage = self::STAGE_NONE;
         do {
             $currentTokenPointer = $file->findNext($stageTokenTypes, $currentTokenPointer, $rootScopeCloserPointer);
-            if ($currentTokenPointer === false) {
+            if (is_bool($currentTokenPointer)) {
                 break;
             }
-
-            assert(is_int($currentTokenPointer));
 
             $currentToken = $tokens[$currentTokenPointer];
             if ($currentToken['level'] - $rootScopeToken['level'] !== 1) {
@@ -168,11 +173,16 @@ class ClassStructureSniff implements Sniff
             $stage = $this->getStageForToken($file, $currentTokenPointer);
             if ($stage !== null) {
                 if ($this->requiredOrder[$stage] < $this->requiredOrder[$expectedStage]) {
-                    $file->addError(
+                    $fix = $file->addFixableError(
                         sprintf('The placement of %s is invalid.', self::STAGE_TOKEN_NAMES[$stage]),
                         $currentTokenPointer,
                         self::CODE_INVALID_MEMBER_PLACEMENT
                     );
+                    if ($fix) {
+                        $this->fixInvalidMemberPlacement($file, $currentTokenPointer);
+
+                        return $pointer - 1; // run the sniff again to fix members one by one
+                    }
                 } elseif ($this->requiredOrder[$stage] > $this->requiredOrder[$expectedStage]) {
                     $expectedStage = $stage;
                 }
@@ -180,6 +190,8 @@ class ClassStructureSniff implements Sniff
 
             $currentTokenPointer = $currentToken['scope_closer'] ?? $currentTokenPointer + 1;
         } while ($currentTokenPointer !== false);
+
+        return $pointer + 1;
     }
 
     private function getStageForToken(File $file, int $pointer) : ?int
@@ -301,5 +313,114 @@ class ClassStructureSniff implements Sniff
         }
 
         return ClassHelper::getName($file, $classPointer);
+    }
+
+    private function fixInvalidMemberPlacement(File $file, int $pointer) : void
+    {
+        $tokens = $file->getTokens();
+        $endTypes = [T_OPEN_CURLY_BRACKET, T_CLOSE_CURLY_BRACKET, T_SEMICOLON];
+        $previousMemberEndPointer = TokenHelper::findPrevious($file, $endTypes, $pointer - 1);
+        if ($previousMemberEndPointer === null) {
+            throw new RuntimeException('Previous member end pointer not found');
+        }
+
+        $startPointer = $this->findMemberLineStartPointer($file, $pointer, $previousMemberEndPointer);
+
+        if ($tokens[$pointer]['code'] === T_FUNCTION && !FunctionHelper::isAbstract($file, $pointer)) {
+            $endPointer = $tokens[$pointer]['scope_closer'];
+        } else {
+            $endPointer = TokenHelper::findNext($file, T_SEMICOLON, $pointer + 1);
+            if ($endPointer === null) {
+                throw new RuntimeException('End pointer not found');
+            }
+        }
+
+        $possibleWhitespaceTypes = [T_COMMENT, T_DOC_COMMENT, T_DOC_COMMENT_WHITESPACE, T_WHITESPACE];
+        $whitespacePointer = $file->findNext($possibleWhitespaceTypes, $endPointer + 1, null, false, "\n");
+        $nextEffectivePointer = TokenHelper::findNextEffective($file, $endPointer + 1);
+        if ($whitespacePointer < $nextEffectivePointer) {
+            $endPointer = $whitespacePointer;
+        }
+
+        if ($tokens[$previousMemberEndPointer]['code'] === T_CLOSE_CURLY_BRACKET) {
+            $previousScopeOpenerPointer = $tokens[$previousMemberEndPointer]['scope_opener'];
+            $prePreviousMemberEndPointer = TokenHelper::findPrevious($file, $endTypes, $previousScopeOpenerPointer - 1);
+        } else {
+            $prePreviousMemberEndPointer = TokenHelper::findPrevious($file, $endTypes, $previousMemberEndPointer - 1);
+        }
+
+        if ($prePreviousMemberEndPointer === null) {
+            throw new RuntimeException('Pre-previous member end pointer not found');
+        }
+
+        $previousMemberStartPointer = TokenHelper::findNextEffective($file, $prePreviousMemberEndPointer + 1);
+        if ($previousMemberStartPointer === null) {
+            throw new RuntimeException('Previous member start pointer not found');
+        }
+
+        $previousMemberStartPointer = $this->findMemberLineStartPointer(
+            $file,
+            $previousMemberStartPointer,
+            $prePreviousMemberEndPointer
+        );
+
+        $linesBetween = (int) $tokens[$startPointer]['line'] - (int) $tokens[$previousMemberEndPointer]['line'] - 1;
+
+        $file->fixer->beginChangeset();
+
+        $content = '';
+        for ($i = $startPointer; $i <= $endPointer; $i++) {
+            $content .= $tokens[$i]['content'];
+            $file->fixer->replaceToken($i, '');
+        }
+
+        $this->removeBlankLinesAfterMember($file, $linesBetween, $previousMemberEndPointer, $startPointer);
+
+        $newLines = str_repeat($file->eolChar, $linesBetween);
+        $file->fixer->addContentBefore($previousMemberStartPointer, $content . $newLines);
+
+        $file->fixer->endChangeset();
+    }
+
+    private function findMemberLineStartPointer(
+        File $file,
+        int $memberStartPointer,
+        int $previousMemberEndPointer
+    ) : int {
+        $types = [T_OPEN_CURLY_BRACKET, T_CLOSE_CURLY_BRACKET, T_SEMICOLON];
+
+        $startPointer = DocCommentHelper::findDocCommentOpenToken($file, $memberStartPointer);
+        if ($startPointer === null) {
+            $startPointer = TokenHelper::findNextEffective($file, $previousMemberEndPointer + 1);
+            if ($startPointer === null) {
+                throw new RuntimeException('Start pointer not found');
+            }
+        }
+
+        return (int) $file->findFirstOnLine($types, $startPointer, true);
+    }
+
+    private function removeBlankLinesAfterMember(
+        File $file,
+        int $linesToRemove,
+        int $memberEndPointer,
+        int $endPointer
+    ) : void {
+        $tokens = $file->getTokens();
+        $whitespacePointer = $memberEndPointer;
+        while ($linesToRemove > 0) {
+            $whitespacePointer = TokenHelper::findNext($file, T_WHITESPACE, $whitespacePointer, $endPointer);
+            if ($whitespacePointer === null) {
+                break;
+            }
+
+            if ($tokens[$whitespacePointer]['length'] !== 0) {
+                $whitespacePointer++;
+                continue;
+            }
+
+            $linesToRemove--;
+            $file->fixer->replaceToken($whitespacePointer++, '');
+        }
     }
 }

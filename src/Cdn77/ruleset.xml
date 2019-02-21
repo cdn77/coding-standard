@@ -9,6 +9,7 @@
     <arg name="colors"/>
     <arg name="encoding" value="utf-8"/>
     <arg value="n"/>
+    <arg value="p"/>
     <arg value="s"/>
 
     <!-- use Doctrine as the base standard -->

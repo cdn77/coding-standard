@@ -21,6 +21,11 @@ class A
         \DateTimeImmutable $andAnotherLongNameOverThere
     ) {
     }
+
+    public function multiLineMethodWithPrecisely121CharsOnSingleline(
+        $someHugeVariableNameJustToFillTheSpaceBlaah
+    ) : void {
+    }
 }
 
 interface B
@@ -38,6 +43,10 @@ interface B
         \DateTimeImmutable $someLongNameHere,
         \DateTimeImmutable $andAnotherLongNameOverThere
     );
+
+    public function multiLineMethodWithPrecisely121CharsOnSingleline(
+        $someHugeVariableNameJustToFillTheSpaceBlah
+    ) : void;
 }
 
 function thisSniffOnlyAppliesToMethodsSoFunctionShouldBeIgnored(

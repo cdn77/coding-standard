@@ -10,6 +10,7 @@ use SlevomatCodingStandard\Helpers\FunctionHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function assert;
 use function in_array;
+use function is_bool;
 use function is_int;
 use function is_string;
 use function preg_replace;
@@ -50,18 +51,25 @@ class SingleLineMethodDeclarationWhenPossibleSniff implements Sniff
 
         $tokens = $file->getTokens();
 
-        $lineStartPtr = $file->findFirstOnLine(T_WHITESPACE, $pointer);
-        assert(is_int($lineStartPtr));
-
-        $methodDeclarationEndPtr = $file->findNext([T_OPEN_CURLY_BRACKET, T_SEMICOLON], $pointer);
-        assert(is_int($methodDeclarationEndPtr));
-
-        $declarationEndLine = $tokens[$methodDeclarationEndPtr]['line'];
-        if (in_array($tokens[$lineStartPtr]['line'], [$declarationEndLine, $declarationEndLine - 1], true)) {
+        $lineStartPointer = $file->findFirstOnLine(T_WHITESPACE, $pointer);
+        if (is_bool($lineStartPointer)) {
             return;
         }
 
-        $methodDeclaration = TokenHelper::getContent($file, $lineStartPtr, $methodDeclarationEndPtr - 1);
+        $methodDeclarationEndPointer = $file->findNext([T_OPEN_CURLY_BRACKET, T_SEMICOLON], $pointer);
+        assert(is_int($methodDeclarationEndPointer));
+
+        $declarationEndLine = $tokens[$methodDeclarationEndPointer]['line'];
+        if (in_array($tokens[$lineStartPointer]['line'], [$declarationEndLine, $declarationEndLine - 1], true)) {
+            return;
+        }
+
+        $singleLineMethodDeclarationEndPointer = $methodDeclarationEndPointer;
+        if ($tokens[$methodDeclarationEndPointer]['code'] === T_OPEN_CURLY_BRACKET) {
+            $singleLineMethodDeclarationEndPointer--;
+        }
+
+        $methodDeclaration = TokenHelper::getContent($file, $lineStartPointer, $singleLineMethodDeclarationEndPointer);
         $methodDeclaration = preg_replace('~\n +~', ' ', $methodDeclaration);
         assert(is_string($methodDeclaration));
 
@@ -78,21 +86,20 @@ class SingleLineMethodDeclarationWhenPossibleSniff implements Sniff
             return;
         }
 
-        $whitespaceBeforeMethod = $tokens[$lineStartPtr]['content'];
+        $whitespaceBeforeMethod = $tokens[$lineStartPointer]['content'];
 
         $file->fixer->beginChangeset();
 
-        for ($i = $lineStartPtr; $i <= $methodDeclarationEndPtr; $i++) {
+        for ($i = $lineStartPointer; $i <= $methodDeclarationEndPointer; $i++) {
             $file->fixer->replaceToken($i, '');
         }
 
-        if ($tokens[$methodDeclarationEndPtr]['code'] === T_OPEN_CURLY_BRACKET) {
+        $replacement = $methodDeclaration;
+        if ($tokens[$methodDeclarationEndPointer]['code'] === T_OPEN_CURLY_BRACKET) {
             $replacement = sprintf("%s\n%s{", $methodDeclaration, $whitespaceBeforeMethod);
-        } else {
-            $replacement = $methodDeclaration . ';';
         }
 
-        $file->fixer->replaceToken($lineStartPtr, $replacement);
+        $file->fixer->replaceToken($lineStartPointer, $replacement);
 
         $file->fixer->endChangeset();
     }

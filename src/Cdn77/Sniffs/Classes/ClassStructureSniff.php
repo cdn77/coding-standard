@@ -210,7 +210,7 @@ class ClassStructureSniff implements Sniff
                     default:
                         return self::STAGE_PRIVATE_CONSTANTS;
                 }
-                // never reached
+                break;
             case T_FUNCTION:
                 $name = strtolower($tokens[$file->findNext(T_STRING, $pointer + 1)]['content']);
                 if (array_key_exists($name, self::SPECIAL_METHODS)) {
@@ -230,7 +230,7 @@ class ClassStructureSniff implements Sniff
                     default:
                         return $isStatic ? self::STAGE_PRIVATE_STATIC_METHODS : self::STAGE_PRIVATE_METHODS;
                 }
-                // never reached
+                break;
             default:
                 $nextPointer = TokenHelper::findNextEffective($file, $pointer + 1);
                 if ($tokens[$nextPointer]['code'] !== T_VARIABLE) {

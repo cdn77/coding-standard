@@ -44,7 +44,7 @@ class SingleLineMethodDeclarationWhenPossibleSniff implements Sniff
      */
     public function process(File $file, $pointer) : void
     {
-        if (!FunctionHelper::isMethod($file, $pointer)) {
+        if (! FunctionHelper::isMethod($file, $pointer)) {
             return;
         }
 
@@ -74,7 +74,7 @@ class SingleLineMethodDeclarationWhenPossibleSniff implements Sniff
 
         $error = sprintf('Method "%s" can be placed on a single line.', FunctionHelper::getName($file, $pointer));
         $fix = $file->addFixableError($error, $pointer, self::CODE_UNNECESSARY_MULTI_LINE_METHOD);
-        if (!$fix) {
+        if (! $fix) {
             return;
         }
 

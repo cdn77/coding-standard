@@ -11,4 +11,6 @@
     <file>tests/</file>
 
     <exclude-pattern>tests/*/data/*</exclude-pattern>
+    <!--  @todo remove when merged to upstream  -->
+    <exclude-pattern>src/Cdn77/Sniffs/ControlStructures/*</exclude-pattern>
 </ruleset>

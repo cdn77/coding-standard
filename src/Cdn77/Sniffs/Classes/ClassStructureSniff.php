@@ -210,7 +210,8 @@ class ClassStructureSniff implements Sniff
                     default:
                         return self::STAGE_PRIVATE_CONSTANTS;
                 }
-                // never reached
+
+                break;
             case T_FUNCTION:
                 $name = strtolower($tokens[$file->findNext(T_STRING, $pointer + 1)]['content']);
                 if (array_key_exists($name, self::SPECIAL_METHODS)) {
@@ -230,7 +231,8 @@ class ClassStructureSniff implements Sniff
                     default:
                         return $isStatic ? self::STAGE_PRIVATE_STATIC_METHODS : self::STAGE_PRIVATE_METHODS;
                 }
-                // never reached
+
+                break;
             default:
                 $nextPointer = TokenHelper::findNextEffective($file, $pointer + 1);
                 if ($tokens[$nextPointer]['code'] !== T_VARIABLE) {
@@ -239,7 +241,7 @@ class ClassStructureSniff implements Sniff
 
                 $previousPointer = TokenHelper::findPreviousEffective($file, $pointer - 1);
                 $visibility = $tokens[$previousPointer]['code'];
-                if (!in_array($visibility, Tokens::$scopeModifiers, true)) {
+                if (! in_array($visibility, Tokens::$scopeModifiers, true)) {
                     $visibility = T_PUBLIC;
                 }
 
@@ -282,7 +284,7 @@ class ClassStructureSniff implements Sniff
 
     private function isStaticConstructor(File $file, int $pointer, bool $isStatic) : bool
     {
-        if (!$isStatic) {
+        if (! $isStatic) {
             return false;
         }
 
@@ -326,7 +328,7 @@ class ClassStructureSniff implements Sniff
 
         $startPointer = $this->findMemberLineStartPointer($file, $pointer, $previousMemberEndPointer);
 
-        if ($tokens[$pointer]['code'] === T_FUNCTION && !FunctionHelper::isAbstract($file, $pointer)) {
+        if ($tokens[$pointer]['code'] === T_FUNCTION && ! FunctionHelper::isAbstract($file, $pointer)) {
             $endPointer = $tokens[$pointer]['scope_closer'];
         } else {
             $endPointer = TokenHelper::findNext($file, T_SEMICOLON, $pointer + 1);
@@ -416,6 +418,7 @@ class ClassStructureSniff implements Sniff
 
             if ($tokens[$whitespacePointer]['length'] !== 0) {
                 $whitespacePointer++;
+
                 continue;
             }
 

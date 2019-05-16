@@ -5,6 +5,8 @@ parameters:
     excludes_analyse:
         - %currentWorkingDirectory%/tests/*/data/*
         - %currentWorkingDirectory%/vendor
+        # @todo remove when merged to upstream
+        - %currentWorkingDirectory%/src/Cdn77/Sniffs/ControlStructures/
     paths:
         - %currentWorkingDirectory%
 

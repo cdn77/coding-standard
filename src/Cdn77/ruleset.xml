@@ -15,8 +15,11 @@
     <!-- use Doctrine as the base standard -->
     <rule ref="Doctrine">
         <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
-        <exclude name="Generic.Formatting.SpaceAfterNot"/>
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+        <!-- deprecated -->
+        <exclude name="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing"/>
+        <!-- replaced by SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing and ...JumpStatementsSpacing -->
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing"/>
     </rule>
 
     <!-- compatibility with PSR-12 and JetBrains defaults -->
@@ -56,5 +59,10 @@
                 "
             />
         </properties>
+    </rule>
+
+    <!-- Ignore blank lines before if, foreach, etc @todo replace with Slevomat sniffs once merged into upstream -->
+    <rule ref="Cdn77.ControlStructures.BlockControlStructureSpacing">
+        <exclude name="Cdn77CodingStandard.ControlStructures.BlockControlStructureSpacing.IncorrectLinesCountBeforeControlStructure"/>
     </rule>
 </ruleset>

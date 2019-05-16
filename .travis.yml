@@ -1,8 +1,8 @@
 language: php
 php:
-    - 7.1
     - 7.2
     - 7.3
+    - 7.4snapshot
     - nightly
 
 env:
@@ -20,16 +20,17 @@ stages:
 
 jobs:
     allow_failures:
+        - php: 7.4snapshot
         - php: nightly
 
     include:
         - stage: Code Quality
           name: Lint
-          php: 7.1
+          php: 7.2
           script: make lint
         - name: Coding Standard
-          php: 7.1
+          php: 7.2
           script: make cs
         - name: Static Analysis
-          php: 7.1
+          php: 7.2
           script: make static-analysis

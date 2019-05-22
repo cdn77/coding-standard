@@ -14,5 +14,5 @@ composer require --dev cdn77/coding-standard
 * Reference this coding standard in your `phpcs.xml.dist` (_check out [the one used in this project](phpcs.xml.dist)_):
 
 ```
-<rule ref="Cdn77"/>
+<rule ref="Cdn77CodingStandard"/>
 ```

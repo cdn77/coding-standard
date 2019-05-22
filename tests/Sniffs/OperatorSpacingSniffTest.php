@@ -17,7 +17,7 @@ class OperatorSpacingSniffTest extends TestCase
     {
         $file = self::checkFile(__DIR__ . '/data/OperatorSpacingSniffErrors.php');
 
-        self::assertSame(89, $file->getErrorCount());
+        self::assertSame(84, $file->getErrorCount());
 
         self::assertAllFixedInFile($file);
     }

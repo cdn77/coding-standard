@@ -20,6 +20,10 @@
         <exclude name="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing"/>
         <!-- replaced by SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing and ...JumpStatementsSpacing -->
         <exclude name="Squiz.WhiteSpace.ControlStructureSpacing"/>
+        <!-- replaced by Cdn77CodingStandard.OperatorSpacingSniff -->
+        <exclude name="Generic.WhiteSpace.IncrementDecrementSpacing"/>
+        <!-- replaced by Cdn77CodingStandard.OperatorSpacingSniff -->
+        <exclude name="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
     </rule>
 
     <!-- compatibility with PSR-12 and JetBrains defaults -->

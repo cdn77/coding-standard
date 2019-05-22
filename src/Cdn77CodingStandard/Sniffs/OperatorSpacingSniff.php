@@ -15,7 +15,6 @@ use function strlen;
 use const T_CLOSE_PARENTHESIS;
 use const T_CLOSE_SHORT_ARRAY;
 use const T_CLOSE_SQUARE_BRACKET;
-use const T_COMMA;
 use const T_COMMENT;
 use const T_CONSTANT_ENCAPSED_STRING;
 use const T_DEC;
@@ -28,14 +27,18 @@ use const T_INSTANCEOF;
 use const T_LNUMBER;
 use const T_MINUS;
 use const T_NUM_STRING;
-use const T_OPEN_PARENTHESIS;
-use const T_OPEN_SQUARE_BRACKET;
-use const T_SEMICOLON;
 use const T_STRING;
 use const T_STRING_CONCAT;
 use const T_VARIABLE;
 use const T_WHITESPACE;
 
+/**
+ * Replaces:
+ *     Generic.WhiteSpace.IncrementDecrementSpacing - added handling of unary T_MINUS, eg. $a = - $b
+ *     Squiz.WhiteSpace.OperatorSpacingSniff - added handling of T_STRING_CONCAT and T_INSTANCEOF
+ *     Squiz.Whitespace.LogicalOperatorSpacingSniff - it's basically duplicate of OperatorSpacingSniff,
+ *                                                    we just add appropriate tokens here...
+ */
 final class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 {
     public const CODE_SPACE_BEFORE = 'SpaceBefore';
@@ -89,14 +92,12 @@ final class OperatorSpacingSniff extends SquizOperatorSpacingSniff
         }
 
         if ($unaryType === self::UNARY_LEFT) {
-            $this->ensureOneSpaceBeforeOperator($file, $pointer);
             $this->ensureZeroSpaceAfterUnaryOperator($file, $pointer);
 
             return;
         }
 
         $this->ensureZeroSpaceBeforeUnaryOperator($file, $pointer);
-        $this->ensureOneSpaceAfterOperator($file, $pointer);
     }
 
     private function ensureOneSpaceBeforeOperator(File $file, int $pointer) : void
@@ -107,28 +108,19 @@ final class OperatorSpacingSniff extends SquizOperatorSpacingSniff
             return;
         }
 
-        $expectedSpaces = 1;
-        if (in_array($tokens[$pointer]['code'], [T_INC, T_DEC], true)) {
-            $previousEffective = TokenHelper::findPreviousEffective($file, $pointer - 1);
-            $types = [T_OPEN_PARENTHESIS, T_OPEN_SQUARE_BRACKET];
-            if ($previousEffective !== null && in_array($tokens[$previousEffective]['code'], $types, true)) {
-                $expectedSpaces = 0;
-            }
-        }
-
         $numberOfSpaces = $this->numberOfSpaces($tokens[$pointer - 1]);
-        if ($numberOfSpaces === $expectedSpaces
-            || ! $this->recordErrorBefore($file, $pointer, $tokens[$pointer], $expectedSpaces, $numberOfSpaces)) {
+        if ($numberOfSpaces === 1
+            || ! $this->recordErrorBefore($file, $pointer, $tokens[$pointer], 1, $numberOfSpaces)) {
             return;
         }
 
-        if ($numberOfSpaces < $expectedSpaces) {
+        if ($numberOfSpaces === 0) {
             $file->fixer->addContentBefore($pointer, ' ');
 
             return;
         }
 
-        $file->fixer->replaceToken($pointer - 1, $expectedSpaces === 0 ? '' : ' ');
+        $file->fixer->replaceToken($pointer - 1, ' ');
     }
 
     /**
@@ -244,28 +236,19 @@ final class OperatorSpacingSniff extends SquizOperatorSpacingSniff
             return;
         }
 
-        $expectedNumberOfSpaces = 1;
-        if (in_array($tokens[$pointer]['code'], [T_INC, T_DEC], true)) {
-            $nextEffective = TokenHelper::findNextEffective($file, $pointer + 1);
-            $types = [T_CLOSE_PARENTHESIS, T_SEMICOLON, T_COMMA, T_CLOSE_SQUARE_BRACKET];
-            if ($nextEffective !== null && in_array($tokens[$nextEffective]['code'], $types, true)) {
-                $expectedNumberOfSpaces = 0;
-            }
-        }
-
         $numberOfSpaces = $this->numberOfSpaces($tokens[$pointer + 1]);
-        if ($numberOfSpaces === $expectedNumberOfSpaces
+        if ($numberOfSpaces === 1
             || ! $this->recordErrorAfter($file, $pointer, $tokens[$pointer], 1, $numberOfSpaces)) {
             return;
         }
 
-        if ($numberOfSpaces < $expectedNumberOfSpaces) {
+        if ($numberOfSpaces === 0) {
             $file->fixer->addContent($pointer, ' ');
 
             return;
         }
 
-        $file->fixer->replaceToken($pointer + 1, $expectedNumberOfSpaces === 0 ? '' : ' ');
+        $file->fixer->replaceToken($pointer + 1, ' ');
     }
 
     /**

@@ -20,7 +20,7 @@ class NegationOperatorSpacingSniffTest extends TestCase
             ['requireSpace' => true]
         );
 
-        self::assertSame(5, $file->getErrorCount());
+        self::assertSame(97, $file->getErrorCount());
 
         self::assertAllFixedInFile($file);
     }

@@ -13,7 +13,7 @@ class OperatorSpacingSniffTest extends TestCase
         self::assertNoSniffErrorInFile(
             self::checkFile(
                 __DIR__ . '/data/OperatorSpacingSniffNoErrors.php',
-                ['allowMultipleStatementsAlignment' => false]
+                ['ignoreSpacingBeforeAssignments' => false]
             )
         );
     }
@@ -22,7 +22,7 @@ class OperatorSpacingSniffTest extends TestCase
     {
         $file = self::checkFile(
             __DIR__ . '/data/OperatorSpacingSniffErrors.php',
-            ['allowMultipleStatementsAlignment' => false]
+            ['ignoreSpacingBeforeAssignments' => false]
         );
 
         self::assertSame(67, $file->getErrorCount());

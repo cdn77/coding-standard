@@ -70,7 +70,8 @@
 
     <rule ref="Cdn77CodingStandard.Operators.OperatorSpacing">
         <properties>
-            <property name="allowMultipleStatementsAlignment" value="false"/>
+            <property name="ignoreNewlines" value="true"/>
+            <property name="ignoreSpacingBeforeAssignments" value="false"/>
         </properties>
     </rule>
 </ruleset>

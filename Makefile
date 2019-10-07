@@ -31,7 +31,7 @@ test:
 
 .PHONY: lint
 lint:
-	vendor/bin/parallel-lint --exclude vendor .
+	vendor/bin/parallel-lint --exclude vendor --exclude tests/Sniffs/Operators/data .
 
 .PHONY: cs
 cs:

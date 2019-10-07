@@ -6,37 +6,40 @@ namespace Cdn77CodingStandard\Sniffs\Operators;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\OperatorSpacingSniff as SquizOperatorSpacingSniff;
-use SlevomatCodingStandard\Helpers\TokenHelper;
-use function strlen;
-use const T_INLINE_ELSE;
-use const T_INLINE_THEN;
-use const T_INSTANCEOF;
-use const T_WHITESPACE;
+use PHP_CodeSniffer\Util\Tokens;
+use function in_array;
+use const T_ARRAY_CAST;
+use const T_BOOL_CAST;
+use const T_DOUBLE_CAST;
+use const T_ECHO;
+use const T_INT_CAST;
+use const T_MINUS;
+use const T_OBJECT_CAST;
+use const T_PLUS;
+use const T_PRINT;
+use const T_STRING_CAST;
+use const T_UNSET_CAST;
+use const T_YIELD;
 
 /**
- * We need this sniff until Squiz accepts option allowMultipleStatementsAlignment and adds T_INSTANCEOF handling
- *
- * @see https://github.com/squizlabs/PHP_CodeSniffer/pull/2515
- * @see https://github.com/squizlabs/PHP_CodeSniffer/pull/2516
+ * We need this sniff until Squiz accepts fix for unary operands detection
+ * https://github.com/squizlabs/PHP_CodeSniffer/pull/2640
  */
 final class OperatorSpacingSniff extends SquizOperatorSpacingSniff
 {
-    public const CODE_SPACE_BEFORE = 'SpaceBefore';
-    public const CODE_SPACE_AFTER = 'SpaceAfter';
+    private const NON_OPERAND_TOKENS = [
+        T_ECHO,
+        T_PRINT,
+        T_YIELD,
 
-    /** @var bool */
-    public $allowMultipleStatementsAlignment = true;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function register() : array
-    {
-        $tokens = parent::register();
-        $tokens[] = T_INSTANCEOF;
-
-        return $tokens;
-    }
+        T_ARRAY_CAST,
+        T_BOOL_CAST,
+        T_DOUBLE_CAST,
+        T_INT_CAST,
+        T_OBJECT_CAST,
+        T_STRING_CAST,
+        T_UNSET_CAST,
+    ];
 
     /**
      * @param int $pointer
@@ -45,133 +48,33 @@ final class OperatorSpacingSniff extends SquizOperatorSpacingSniff
      */
     public function process(File $file, $pointer) : void
     {
-        if ($this->allowMultipleStatementsAlignment) {
-            parent::process($file, $pointer);
-
-            return;
-        }
-
         if (! $this->isOperator($file, $pointer)) {
             return;
         }
 
-        $this->ensureOneSpaceBeforeOperator($file, $pointer);
-        $this->ensureOneSpaceAfterOperator($file, $pointer);
-    }
-
-    private function ensureOneSpaceBeforeOperator(File $file, int $pointer) : void
-    {
-        if (! $this->shouldValidateBefore($file, $pointer)) {
-            return;
-        }
-
-        $tokens = $file->getTokens();
-
-        $numberOfSpaces = $this->numberOfSpaces($tokens[$pointer - 1]);
-        if ($numberOfSpaces === 1
-            || ! $this->recordErrorBefore($file, $pointer, $tokens[$pointer], 1, $numberOfSpaces)) {
-            return;
-        }
-
-        if ($numberOfSpaces === 0) {
-            $file->fixer->addContentBefore($pointer, ' ');
-
-            return;
-        }
-
-        $file->fixer->replaceToken($pointer - 1, ' ');
-    }
-
-    private function ensureOneSpaceAfterOperator(File $file, int $pointer) : void
-    {
-        if (! $this->shouldValidateAfter($file, $pointer)) {
-            return;
-        }
-
-        $tokens = $file->getTokens();
-
-        $numberOfSpaces = $this->numberOfSpaces($tokens[$pointer + 1]);
-        if ($numberOfSpaces === 1
-            || ! $this->recordErrorAfter($file, $pointer, $tokens[$pointer], 1, $numberOfSpaces)) {
-            return;
-        }
-
-        if ($numberOfSpaces === 0) {
-            $file->fixer->addContent($pointer, ' ');
-
-            return;
-        }
-
-        $file->fixer->replaceToken($pointer + 1, ' ');
-    }
-
-    private function shouldValidateBefore(File $file, int $pointer) : bool
-    {
-        $tokens = $file->getTokens();
-        $currentToken = $tokens[$pointer];
-        $previousToken = $tokens[$pointer - 1];
-
-        if ($currentToken['code'] === T_INLINE_ELSE && $previousToken['code'] === T_INLINE_THEN) {
-            return false;
-        }
-
-        $previousEffective = TokenHelper::findPreviousEffective($file, $pointer - 1);
-
-        return $previousEffective === null || $currentToken['line'] === $tokens[$previousEffective]['line'];
+        parent::process($file, $pointer);
     }
 
     /**
-     * @param mixed[] $token
+     * @param int $pointer
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
-    private function recordErrorBefore(File $file, int $pointer, array $token, int $expected, int $found) : bool
+    protected function isOperator(File $file, $pointer) : bool
     {
-        return $file->addFixableError(
-            'Expected exactly %d space before "%s"; %d found',
-            $pointer,
-            self::CODE_SPACE_BEFORE,
-            [$expected, $token['content'], $found]
-        );
-    }
+        $isOperator = parent::isOperator($file, $pointer);
+        if (! $isOperator) {
+            return false;
+        }
 
-    private function shouldValidateAfter(File $file, int $pointer) : bool
-    {
         $tokens = $file->getTokens();
-
-        if (! isset($tokens[$pointer + 1])) {
-            return false;
+        if ($tokens[$pointer]['code'] === T_MINUS || $tokens[$pointer]['code'] === T_PLUS) {
+            $prev = $file->findPrevious(Tokens::$emptyTokens, $pointer - 1, null, true);
+            if (in_array($tokens[$prev]['code'], self::NON_OPERAND_TOKENS, true)) {
+                return false;
+            }
         }
 
-        if ($tokens[$pointer]['code'] === T_INLINE_THEN && $tokens[$pointer + 1]['code'] === T_INLINE_ELSE) {
-            return false;
-        }
-
-        $nextEffective = TokenHelper::findNextEffective($file, $pointer + 1);
-
-        return $nextEffective === null || $tokens[$pointer]['line'] === $tokens[$nextEffective]['line'];
-    }
-
-    /**
-     * @param mixed[] $token
-     */
-    private function recordErrorAfter(File $file, int $pointer, array $token, int $expected, int $found) : bool
-    {
-        return $file->addFixableError(
-            'Expected exactly %d space after "%s"; %d found',
-            $pointer,
-            self::CODE_SPACE_AFTER,
-            [$expected, $token['content'], $found]
-        );
-    }
-
-    /**
-     * @param mixed[] $token
-     */
-    private function numberOfSpaces(array $token) : int
-    {
-        if ($token['code'] !== T_WHITESPACE) {
-            return 0;
-        }
-
-        return strlen($token['content']);
+        return true;
     }
 }

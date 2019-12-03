@@ -146,7 +146,7 @@ class ClassStructureSniff implements Sniff
     /**
      * @param int $pointer
      *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
     public function process(File $file, $pointer) : int
     {
@@ -211,7 +211,7 @@ class ClassStructureSniff implements Sniff
                         return self::STAGE_PRIVATE_CONSTANTS;
                 }
 
-                break;
+                // https://github.com/squizlabs/PHP_CodeSniffer/issues/2800
             case T_FUNCTION:
                 $name = strtolower($tokens[$file->findNext(T_STRING, $pointer + 1)]['content']);
                 if (array_key_exists($name, self::SPECIAL_METHODS)) {
@@ -232,7 +232,7 @@ class ClassStructureSniff implements Sniff
                         return $isStatic ? self::STAGE_PRIVATE_STATIC_METHODS : self::STAGE_PRIVATE_METHODS;
                 }
 
-                break;
+                // https://github.com/squizlabs/PHP_CodeSniffer/issues/2800
             default:
                 $nextPointer = TokenHelper::findNextEffective($file, $pointer + 1);
                 if ($tokens[$nextPointer]['code'] !== T_VARIABLE) {

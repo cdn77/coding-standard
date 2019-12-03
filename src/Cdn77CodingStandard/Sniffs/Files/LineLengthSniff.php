@@ -53,7 +53,7 @@ class LineLengthSniff implements Sniff
     /**
      * @param int $pointer
      *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
     public function process(File $file, $pointer) : int
     {
@@ -113,7 +113,7 @@ class LineLengthSniff implements Sniff
 
                 $space = strrpos($tokens[$pointer]['content'], ' ');
                 if ($space !== false) {
-                    $nonBreakingLength -= ($space + 1);
+                    $nonBreakingLength -= $space + 1;
                 }
 
                 if ($nonBreakingLength + $indent > $this->lineLengthLimit) {

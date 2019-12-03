@@ -1,12 +1,9 @@
 parameters:
     bootstrap: %currentWorkingDirectory%/tests/bootstrap.php
-    memory-limit: -1
     level: max
     excludes_analyse:
         - %currentWorkingDirectory%/tests/*/data/*
         - %currentWorkingDirectory%/vendor
-        # @todo remove when merged to upstream
-        - %currentWorkingDirectory%/src/Cdn77CodingStandard/Sniffs/ControlStructures/
     paths:
         - %currentWorkingDirectory%
 

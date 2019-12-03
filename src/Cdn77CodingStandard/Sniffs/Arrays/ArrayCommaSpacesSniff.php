@@ -27,7 +27,7 @@ class ArrayCommaSpacesSniff implements Sniff
     /**
      * @param int $stackPointer
      *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
     public function process(File $phpcsFile, $stackPointer) : int
     {

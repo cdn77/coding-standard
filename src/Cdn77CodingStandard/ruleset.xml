@@ -16,19 +16,8 @@
     <rule ref="Doctrine">
         <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
-        <!-- deprecated -->
-        <exclude name="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing"/>
-        <!-- replaced by SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing and ...JumpStatementsSpacing -->
-        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing"/>
         <!-- replaced by Cdn77CodingStandard.Operators.OperatorSpacing -->
         <exclude name="Squiz.WhiteSpace.OperatorSpacing"/>
-    </rule>
-
-    <!-- compatibility with PSR-12 and JetBrains defaults -->
-    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses">
-        <properties>
-            <property name="psr12Compatible" value="true"/>
-        </properties>
     </rule>
 
     <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
@@ -44,28 +33,6 @@
                     "
             />
         </properties>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration">
-        <properties>
-            <property
-                name="usefulAnnotations"
-                type="array"
-                extend="true"
-                value="
-                    @codeCoverageIgnoreStart,
-                    @codeCoverageIgnoreEnd,
-                    @phpcsSuppress,
-                    @Rest\,
-                    @Route
-                "
-            />
-        </properties>
-    </rule>
-
-    <!-- Ignore blank lines before if, foreach, etc @todo replace with Slevomat sniffs once merged into upstream -->
-    <rule ref="Cdn77CodingStandard.ControlStructures.BlockControlStructureSpacing">
-        <exclude name="Cdn77CodingStandard.ControlStructures.BlockControlStructureSpacing.IncorrectLinesCountBeforeControlStructure"/>
     </rule>
 
     <rule ref="Cdn77CodingStandard.Operators.OperatorSpacing">

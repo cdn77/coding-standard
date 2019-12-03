@@ -40,7 +40,7 @@ final class NegationOperatorSpacingSniff implements Sniff
     /**
      * @param int $pointer
      *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
     public function process(File $file, $pointer) : void
     {

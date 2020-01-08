@@ -16,26 +16,82 @@
     <rule ref="Doctrine">
         <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
-        <!-- replaced by Cdn77CodingStandard.Operators.OperatorSpacing -->
-        <exclude name="Squiz.WhiteSpace.OperatorSpacing"/>
+
+        <!-- replaced by SlevomatCodingStandard.Commenting.RequireOneLineDocComment -->
+        <exclude name="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"/>
+
+        <!-- copy&pasted to this repo until https://github.com/squizlabs/PHP_CodeSniffer/pull/2812 gets merged -->
+        <exclude name="Squiz.Arrays.ArrayDeclaration"/>
     </rule>
 
-    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
+    <rule ref="Cdn77CodingStandard.Arrays.ArrayDeclaration">
+        <!-- Disable arrow alignment -->
+        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.DoubleArrowNotAligned"/>
+        <!-- Uses indentation of only single space -->
+        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.KeyNotAligned"/>
+        <!-- Allow multiple values on a single line -->
+        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
+        <!-- Disable alignment of braces -->
+        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
+        <!-- Disable alignment of values with opening brace -->
+        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.ValueNotAligned"/>
+        <!-- Checked by SlevomatCodingStandard.Arrays.TrailingArrayComma.MissingTrailingComma -->
+        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.NoCommaAfterLast"/>
+        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.NoComma"/>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
+    <rule ref="SlevomatCodingStandard.Arrays.SingleLineArrayWhitespace"/>
+    <rule ref="SlevomatCodingStandard.Classes.ClassStructure">
         <properties>
-            <property name="alwaysUsedPropertiesAnnotations" type="array"
-                      value="
-                      @ORM\Column,
-                      @ORM\Embedded,
-                      @ORM\OneToOne,
-                      @ORM\OneToMany,
-                      @ORM\ManyToOne,
-                      @ORM\ManyToMany
-                    "
-            />
+            <property name="groups" type="array" value="
+                uses,
+                public constants,
+                protected constants,
+                private constants,
+                public static properties,
+                protected static properties,
+                private static properties,
+                public properties,
+                protected properties,
+                private properties,
+                public static abstract methods,
+                public static methods,
+                protected static abstract methods,
+                protected static methods,
+                private static methods,
+                constructor,
+                static constructors,
+                destructor,
+                magic methods,
+                public abstract methods,
+                public methods,
+                protected abstract methods,
+                protected methods,
+                private methods,
+            "/>
         </properties>
     </rule>
+    <rule ref="SlevomatCodingStandard.Classes.ConstantSpacing"/>
+    <rule ref="SlevomatCodingStandard.Classes.ParentCallSpacing"/>
+    <rule ref="SlevomatCodingStandard.Classes.PropertySpacing"/>
+    <rule ref="SlevomatCodingStandard.Classes.RequireSingleLineMethodSignature"/>
+    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
+        <properties>
+            <property name="alwaysUsedPropertiesAnnotations" type="array" extend="true" value="
+                @ORM\,
+                @Serializer\
+            "/>
+            <property name="alwaysUsedMethodsAnnotations" type="array" extend="true" value="
+                @Serializer\
+            "/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Commenting.RequireOneLineDocComment"/>
+    <rule ref="SlevomatCodingStandard.Files.LineLength"/>
+    <rule ref="SlevomatCodingStandard.Operators.NegationOperatorSpacing"/>
 
-    <rule ref="Cdn77CodingStandard.Operators.OperatorSpacing">
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
         <properties>
             <property name="ignoreNewlines" value="true"/>
             <property name="ignoreSpacingBeforeAssignments" value="false"/>

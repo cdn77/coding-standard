@@ -4,6 +4,7 @@ parameters:
     excludes_analyse:
         - %currentWorkingDirectory%/tests/*/data/*
         - %currentWorkingDirectory%/vendor
+        - %currentWorkingDirectory%/src/Cdn77CodingStandard/Sniffs/Arrays/ArrayDeclarationSniff.php # todo remove
     paths:
         - %currentWorkingDirectory%
 

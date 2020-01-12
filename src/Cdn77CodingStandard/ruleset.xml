@@ -22,15 +22,25 @@
 
     <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
         <properties>
-            <property name="alwaysUsedPropertiesAnnotations" type="array"
-                      value="
-                      @ORM\Column,
-                      @ORM\Embedded,
-                      @ORM\OneToOne,
-                      @ORM\OneToMany,
-                      @ORM\ManyToOne,
-                      @ORM\ManyToMany
-                    "
+            <property
+                name="alwaysUsedPropertiesAnnotations"
+                type="array"
+                value="
+                    @ORM\,
+                    @Serializer\
+                "
+            />
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
+        <properties>
+            <property
+                name="alwaysUsedMethodsAnnotations"
+                type="array"
+                extend="true"
+                value="
+                    @Serializer\
+                "
             />
         </properties>
     </rule>

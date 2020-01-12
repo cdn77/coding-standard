@@ -1,6 +1,6 @@
 {
     "name": "cdn77/coding-standard",
-    "description": "Cdn77 Coding Standard.",
+    "description": "Cdn77 Coding Standard",
     "type": "phpcodesniffer-standard",
     "license": "MIT",
     "autoload": {

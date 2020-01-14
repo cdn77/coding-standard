@@ -18,7 +18,7 @@ list:
 vendor: vendor/lock
 
 vendor/lock: composer.json
-	composer install $(COMPOSER_ARGS)
+	composer update $(COMPOSER_ARGS)
 	touch vendor/lock
 
 ### END

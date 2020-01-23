@@ -1,6 +1,6 @@
 <?php
 
-namespace Cdn77CodingStandard\Sniffs\Arrays;
+namespace Cdn77\Sniffs\Arrays;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;

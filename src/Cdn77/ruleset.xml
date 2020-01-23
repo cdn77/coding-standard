@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <ruleset
-    name="Cdn77CodingStandard"
+    name="Cdn77"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../vendor/squizlabs/php_codesniffer/phpcs.xsd"
 >
@@ -24,20 +24,20 @@
         <exclude name="Squiz.Arrays.ArrayDeclaration"/>
     </rule>
 
-    <rule ref="Cdn77CodingStandard.Arrays.ArrayDeclaration">
+    <rule ref="Cdn77.Arrays.ArrayDeclaration">
         <!-- Disable arrow alignment -->
-        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.DoubleArrowNotAligned"/>
+        <exclude name="Cdn77.Arrays.ArrayDeclaration.DoubleArrowNotAligned"/>
         <!-- Uses indentation of only single space -->
-        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.KeyNotAligned"/>
+        <exclude name="Cdn77.Arrays.ArrayDeclaration.KeyNotAligned"/>
         <!-- Allow multiple values on a single line -->
-        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
+        <exclude name="Cdn77.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
         <!-- Disable alignment of braces -->
-        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
+        <exclude name="Cdn77.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
         <!-- Disable alignment of values with opening brace -->
-        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.ValueNotAligned"/>
+        <exclude name="Cdn77.Arrays.ArrayDeclaration.ValueNotAligned"/>
         <!-- Checked by SlevomatCodingStandard.Arrays.TrailingArrayComma.MissingTrailingComma -->
-        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.NoCommaAfterLast"/>
-        <exclude name="Cdn77CodingStandard.Arrays.ArrayDeclaration.NoComma"/>
+        <exclude name="Cdn77.Arrays.ArrayDeclaration.NoCommaAfterLast"/>
+        <exclude name="Cdn77.Arrays.ArrayDeclaration.NoComma"/>
     </rule>
 
     <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>

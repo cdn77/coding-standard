@@ -41,7 +41,6 @@
     </rule>
 
     <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
-    <rule ref="SlevomatCodingStandard.Arrays.SingleLineArrayWhitespace"/>
     <rule ref="SlevomatCodingStandard.Classes.ClassStructure">
         <properties>
             <property name="groups" type="array" value="
@@ -89,7 +88,6 @@
     </rule>
     <rule ref="SlevomatCodingStandard.Commenting.RequireOneLineDocComment"/>
     <rule ref="SlevomatCodingStandard.Files.LineLength"/>
-    <rule ref="SlevomatCodingStandard.Operators.NegationOperatorSpacing"/>
 
     <rule ref="Squiz.WhiteSpace.OperatorSpacing">
         <properties>

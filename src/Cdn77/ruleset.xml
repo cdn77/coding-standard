@@ -25,25 +25,22 @@
 
         <!-- replaced by SlevomatCodingStandard.Commenting.RequireOneLineDocComment -->
         <exclude name="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"/>
-
-        <!-- copy&pasted to this repo until https://github.com/squizlabs/PHP_CodeSniffer/pull/2812 gets merged -->
-        <exclude name="Squiz.Arrays.ArrayDeclaration"/>
     </rule>
 
-    <rule ref="Cdn77.Arrays.ArrayDeclaration">
+    <rule ref="Squiz.Arrays.ArrayDeclaration">
         <!-- Disable arrow alignment -->
-        <exclude name="Cdn77.Arrays.ArrayDeclaration.DoubleArrowNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned"/>
         <!-- Uses indentation of only single space -->
-        <exclude name="Cdn77.Arrays.ArrayDeclaration.KeyNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned"/>
         <!-- Allow multiple values on a single line -->
-        <exclude name="Cdn77.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
         <!-- Disable alignment of braces -->
-        <exclude name="Cdn77.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
         <!-- Disable alignment of values with opening brace -->
-        <exclude name="Cdn77.Arrays.ArrayDeclaration.ValueNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned"/>
         <!-- Checked by SlevomatCodingStandard.Arrays.TrailingArrayComma.MissingTrailingComma -->
-        <exclude name="Cdn77.Arrays.ArrayDeclaration.NoCommaAfterLast"/>
-        <exclude name="Cdn77.Arrays.ArrayDeclaration.NoComma"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.NoCommaAfterLast"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.NoComma"/>
     </rule>
 
     <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>

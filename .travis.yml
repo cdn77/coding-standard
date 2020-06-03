@@ -24,10 +24,6 @@ jobs:
         - php: nightly
 
     include:
-        - stage: Code Quality
-          name: Lint
-          php: 7.2
-          script: make lint
         - name: Coding Standard
           php: 7.2
           script: make cs

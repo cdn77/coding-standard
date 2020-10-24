@@ -1,4 +1,4 @@
-COMPOSER_ARGS += --no-progress --no-interaction
+COMPOSER_ARGS += --no-interaction --no-progress --no-suggest
 
 ### BEGIN main targets
 
@@ -31,7 +31,7 @@ test:
 
 .PHONY: cs
 cs:
-	vendor/bin/phpcs
+	vendor/bin/phpcs $(PHPCS_ARGS)
 
 .PHONY: fix
 fix:
@@ -39,7 +39,7 @@ fix:
 
 .PHONY: static-analysis
 static-analysis:
-	vendor/bin/phpstan analyse
+	vendor/bin/phpstan analyse $(PHPSTAN_ARGS)
 
 .PHONY: check
 check: build cs static-analysis test
@@ -53,6 +53,6 @@ clean: clean-vendor
 
 .PHONY: clean-vendor
 clean-vendor:
-	rm -rf vendor
+	rm -rf vendor  composer.lock
 
 ### END

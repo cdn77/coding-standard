@@ -1,4 +1,4 @@
-Cdn77 Coding Standard [![Build Status](https://travis-ci.com/cdn77/coding-standard.svg?branch=master)](https://travis-ci.org/cdn77/coding-standard)
+Cdn77 Coding Standard [![Build Status](https://github.com/cdn77/coding-standard/workflows/CI/badge.svg?branch=master)](https://github.com/cdn77/coding-standard/actions)
 =====================
 
 Based on Doctrine Coding Standard https://github.com/doctrine/coding-standard

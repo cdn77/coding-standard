@@ -21,7 +21,7 @@
         "phpstan/phpstan": "^0.12.51",
         "phpstan/phpstan-phpunit": "^0.12.16",
         "phpstan/phpstan-strict-rules": "^0.12.5",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^9.4"
     },
     "config": {
         "sort-packages": true

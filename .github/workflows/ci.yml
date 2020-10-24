@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "master"
+  schedule:
+    - cron: "0 17 * * *"
+
+jobs:
+  coding-standard:
+    runs-on: ubuntu-20.04
+    name: Coding Standard
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@2.9.0
+        with:
+          php-version: 7.4
+          coverage: none
+          extensions: json
+          tools: cs2pr
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Dependencies
+        run: COMPOSER_ARGS="--prefer-stable" make
+
+      - name: Coding Standard
+        env:
+          PHPCS_ARGS: -q --no-colors --report=checkstyle
+        run: make -is cs | cs2pr
+
+  phpstan:
+    runs-on: ubuntu-20.04
+    name: PHPStan
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@2.9.0
+        with:
+          php-version: 7.4
+          coverage: none
+          extensions: json
+          tools: cs2pr
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      -   name: Install dependencies with composer
+          run: COMPOSER_ARGS="--prefer-stable" make
+
+      - name: PHPStan
+        env:
+          PHPSTAN_ARGS: --error-format=checkstyle
+        run: make -is static-analysis | cs2pr
+
+  tests:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        php: [7.3, 7.4, 8.0]
+        dependencies: ["", --prefer-lowest]
+    name: PHP ${{ matrix.php }} Test ${{ matrix.dependencies }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@2.9.0
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          extensions: json, mbstring
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Dependencies
+        run: COMPOSER_ARGS="--prefer-stable ${{ matrix.dependencies }}" make
+
+      - name: Run tests
+        run: make test

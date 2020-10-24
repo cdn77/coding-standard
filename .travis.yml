@@ -1,6 +1,5 @@
 language: php
 php:
-    - 7.2
     - 7.3
     - 7.4snapshot
     - nightly
@@ -25,8 +24,8 @@ jobs:
 
     include:
         - name: Coding Standard
-          php: 7.2
+          php: 7.3
           script: make cs
         - name: Static Analysis
-          php: 7.2
+          php: 7.3
           script: make static-analysis

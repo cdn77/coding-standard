@@ -27,22 +27,6 @@
         <exclude name="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"/>
     </rule>
 
-    <rule ref="Squiz.Arrays.ArrayDeclaration">
-        <!-- Disable arrow alignment -->
-        <exclude name="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned"/>
-        <!-- Uses indentation of only single space -->
-        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned"/>
-        <!-- Allow multiple values on a single line -->
-        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
-        <!-- Disable alignment of braces -->
-        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
-        <!-- Disable alignment of values with opening brace -->
-        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned"/>
-        <!-- Checked by SlevomatCodingStandard.Arrays.TrailingArrayComma.MissingTrailingComma -->
-        <exclude name="Squiz.Arrays.ArrayDeclaration.NoCommaAfterLast"/>
-        <exclude name="Squiz.Arrays.ArrayDeclaration.NoComma"/>
-    </rule>
-
     <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
     <rule ref="SlevomatCodingStandard.Classes.ClassStructure">
         <properties>

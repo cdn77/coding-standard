@@ -62,17 +62,6 @@
     <rule ref="SlevomatCodingStandard.Classes.ParentCallSpacing"/>
     <rule ref="SlevomatCodingStandard.Classes.PropertySpacing"/>
     <rule ref="SlevomatCodingStandard.Classes.RequireSingleLineMethodSignature"/>
-    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
-        <properties>
-            <property name="alwaysUsedPropertiesAnnotations" type="array" extend="true" value="
-                @ORM\,
-                @Serializer\
-            "/>
-            <property name="alwaysUsedMethodsAnnotations" type="array" extend="true" value="
-                @Serializer\
-            "/>
-        </properties>
-    </rule>
     <rule ref="SlevomatCodingStandard.Commenting.RequireOneLineDocComment"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing">
         <properties>

@@ -66,7 +66,6 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing">
         <properties>
             <property name="linesCountAfterWhenLastInCaseOrDefault" value="0"/>
-            <property name="linesCountAfterWhenLastInLastCaseOrDefault" value="0"/>
             <property name="tokensToCheck" type="array">
                 <element value="T_GOTO"/>
                 <element value="T_BREAK"/>

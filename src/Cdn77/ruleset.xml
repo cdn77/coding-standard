@@ -66,14 +66,10 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing">
         <properties>
             <property name="linesCountAfterWhenLastInCaseOrDefault" value="0"/>
-            <property name="tokensToCheck" type="array">
-                <element value="T_GOTO"/>
-                <element value="T_BREAK"/>
-                <element value="T_CONTINUE"/>
-                <element value="T_RETURN"/>
-                <element value="T_THROW"/>
-                <element value="T_YIELD"/>
-                <element value="T_YIELD_FROM"/>
+            <property name="jumpStatements" type="array" extend="true">
+                <element value="goto"/>
+                <element value="break"/>
+                <element value="continue"/>
             </property>
         </properties>
     </rule>

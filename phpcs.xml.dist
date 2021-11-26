@@ -7,6 +7,7 @@
 
     <rule ref="Cdn77"/>
 
+    <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion" />
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator" />
     <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch" />
     <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration" />

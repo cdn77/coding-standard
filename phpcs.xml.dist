@@ -7,6 +7,14 @@
 
     <rule ref="Cdn77"/>
 
+    <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat">
+        <properties>
+            <property name="withSpaces" value="no" />
+            <property name="shortNullable" value="no" />
+            <property name="nullPosition" value="last" />
+        </properties>
+    </rule>
+
     <file>src/</file>
     <file>tests/</file>
 

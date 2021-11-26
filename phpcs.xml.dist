@@ -7,6 +7,8 @@
 
     <rule ref="Cdn77"/>
 
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration" />
+
     <file>src/</file>
     <file>tests/</file>
 

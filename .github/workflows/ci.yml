@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        php: [7.4, 8.0]
+        php: ["7.4", "8.0", "8.1"]
         dependencies: ["", --prefer-lowest]
     name: PHP ${{ matrix.php }} Test ${{ matrix.dependencies }}
 
@@ -89,7 +89,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install PHP
-        uses: shivammathur/setup-php@2.9.0
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           coverage: none

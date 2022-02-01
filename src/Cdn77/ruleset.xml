@@ -26,7 +26,7 @@
         <!-- replaced by SlevomatCodingStandard.Commenting.RequireOneLineDocComment -->
         <exclude name="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"/>
 
-        <!-- Tools like PHPStan or Psalm check this better -->
+        <!-- Tools like PHPStan or Psalm check these better -->
         <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification" />
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingTraversableTypeHintSpecification" />
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />

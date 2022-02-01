@@ -79,7 +79,6 @@
             </property>
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator" />
     <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch" />
     <rule ref="SlevomatCodingStandard.Files.LineLength"/>
     <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction" />

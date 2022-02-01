@@ -16,9 +16,9 @@
     <rule ref="Doctrine">
         <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
 
-        <!-- Allow extends on a new line-->
+        <!-- Allow extends on a new line, compatibility with SlevomatCodingStandard.Files.LineLength-->
         <exclude name="PSR2.Classes.ClassDeclaration.ExtendsLine" />
-        <!-- Allow implements on a new line-->
+        <!-- Allow implements on a new line, compatibility with SlevomatCodingStandard.Files.LineLength-->
         <exclude name="PSR2.Classes.ClassDeclaration.ImplementsLine" />
 
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>

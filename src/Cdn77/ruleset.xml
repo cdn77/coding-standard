@@ -80,7 +80,11 @@
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch" />
-    <rule ref="SlevomatCodingStandard.Files.LineLength"/>
+    <rule ref="SlevomatCodingStandard.Files.LineLength">
+        <properties>
+            <property name="ignoreComments" value="true" />
+        </properties>
+    </rule>
     <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction" />
     <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration" />
 

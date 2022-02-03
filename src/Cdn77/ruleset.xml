@@ -23,6 +23,9 @@
 
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
 
+        <!-- $_ variables are used to tell e.g. psalm that the variable is intentionally unused. -->
+        <exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps" />
+
         <!-- replaced by SlevomatCodingStandard.Commenting.RequireOneLineDocComment -->
         <exclude name="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"/>
 

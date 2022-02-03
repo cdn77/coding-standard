@@ -144,3 +144,5 @@ echo $obj?->_varName;
 $var_name . $var_name;
 
 fn($_, $__, $_x) => true;
+
+$var = Potato::new();

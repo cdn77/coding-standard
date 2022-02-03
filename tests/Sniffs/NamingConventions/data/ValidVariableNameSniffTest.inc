@@ -6,11 +6,6 @@ $_varName = 'hello';
 
 class MyClass
 {
-$varName  = 'hello';
-$var_name = 'hello';
-$varname  = 'hello';
-$_varName = 'hello';
-
     public $varName  = 'hello';
     public bool $var_name = false;
     public $varname  = 'hello';
@@ -80,7 +75,6 @@ $xmlParser = 'hello';
 
 echo "{$_SERVER['HOSTNAME']} $var_name";
 
-// Need to be the last thing in this test file.
 $obj->$classVar = $prefix.'-'.$type;
 
 class foo

@@ -146,3 +146,5 @@ echo $obj?->varName;
 echo $obj?->var_name;
 echo $obj?->varname;
 echo $obj?->_varName;
+
+$var_name . $var_name;

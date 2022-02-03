@@ -60,6 +60,7 @@ class ValidVariableNameSniffTest extends TestCase
             138 => self::CODE_NOT_CAMEL_CAPS,
             141 => self::CODE_NOT_CAMEL_CAPS,
             146 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            150 => [self::CODE_NOT_CAMEL_CAPS, self::CODE_NOT_CAMEL_CAPS],
         ];
         $possibleLines = array_keys($errorTypesPerLine);
 
@@ -77,6 +78,6 @@ class ValidVariableNameSniffTest extends TestCase
             }
         }
 
-        self::assertSame(36, $file->getErrorCount());
+        self::assertSame(38, $file->getErrorCount());
     }
 }

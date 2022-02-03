@@ -22,7 +22,14 @@ use const T_WHITESPACE;
 
 class ValidVariableNameSniff extends AbstractVariableSniff
 {
-    public string $pattern = '\b(([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)|_+)\b';
+    public const CODE_DOES_NOT_MATCH_PATTERN = 'DoesNotMatchPattern';
+    public const CODE_MEMBER_DOES_NOT_MATCH_PATTERN = 'MemberDoesNotMatchPattern';
+    public const CODE_STRING_DOES_NOT_MATCH_PATTERN = 'StringDoesNotMatchPattern';
+    private const PATTERN_CAMEL_CASE_OR_UNUSED = '\b(([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)|_+)\b';
+
+    public string $pattern = self::PATTERN_CAMEL_CASE_OR_UNUSED;
+    public string $memberPattern = self::PATTERN_CAMEL_CASE_OR_UNUSED;
+    public string $stringPattern = self::PATTERN_CAMEL_CASE_OR_UNUSED;
 
     /**
      * Processes this test, when one of its tokens is encountered.
@@ -59,10 +66,10 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 if ($tokens[$bracket]['code'] !== T_OPEN_PARENTHESIS) {
                     $objVarName = $tokens[$var]['content'];
 
-                    if (! $this->matchesRegex($objVarName)) {
-                        $error = 'Member variable "%s" is not in valid camel caps format';
+                    if (! $this->matchesRegex($objVarName, $this->memberPattern)) {
+                        $error = sprintf('Member variable "%%s" does not match pattern "%s"', $this->memberPattern);
                         $data = [$objVarName];
-                        $phpcsFile->addError($error, $var, 'MemberNotCamelCaps', $data);
+                        $phpcsFile->addError($error, $var, self::CODE_MEMBER_DOES_NOT_MATCH_PATTERN, $data);
                     }
                 }
             }
@@ -70,22 +77,22 @@ class ValidVariableNameSniff extends AbstractVariableSniff
 
         $objOperator = $phpcsFile->findPrevious(T_WHITESPACE, $stackPtr - 1, null, true);
         if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {
-            if (! $this->matchesRegex($varName)) {
-                $error = 'Member variable "%s" is not in valid camel caps format';
+            if (! $this->matchesRegex($varName, $this->memberPattern)) {
+                $error = sprintf('Member variable "%%s" does not match pattern "%s"', $this->memberPattern);
                 $data = [$tokens[$stackPtr]['content']];
-                $phpcsFile->addError($error, $stackPtr, 'MemberNotCamelCaps', $data);
+                $phpcsFile->addError($error, $stackPtr, self::CODE_MEMBER_DOES_NOT_MATCH_PATTERN, $data);
             }
 
             return;
         }
 
-        if ($this->matchesRegex($varName)) {
+        if ($this->matchesRegex($varName, $this->pattern)) {
             return;
         }
 
-        $error = 'Variable "%s" is not in valid camel caps format';
+        $error = sprintf('Variable "%%s" does not match pattern "%s"', $this->pattern);
         $data = [$varName];
-        $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
+        $phpcsFile->addError($error, $stackPtr, self::CODE_DOES_NOT_MATCH_PATTERN, $data);
     }
 
     /**
@@ -113,12 +120,12 @@ class ValidVariableNameSniff extends AbstractVariableSniff
 
         $errorData = [$varName];
 
-        if ($this->matchesRegex($varName)) {
+        if ($this->matchesRegex($varName, $this->memberPattern)) {
             return;
         }
 
-        $error = 'Member variable "%s" is not in valid camel caps format';
-        $phpcsFile->addError($error, $stackPtr, 'MemberNotCamelCaps', $errorData);
+        $error = sprintf('Member variable "%%s" does not match pattern "%s"', $this->memberPattern);
+        $phpcsFile->addError($error, $stackPtr, self::CODE_MEMBER_DOES_NOT_MATCH_PATTERN, $errorData);
     }
 
     /**
@@ -150,18 +157,18 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 continue;
             }
 
-            if ($this->matchesRegex($varName)) {
+            if ($this->matchesRegex($varName, $this->stringPattern)) {
                 continue;
             }
 
-            $error = 'Variable "%s" is not in valid camel caps format';
+            $error = sprintf('Variable "%%s" does not match pattern "%s"', $this->stringPattern);
             $data = [$varName];
-            $phpcsFile->addError($error, $stackPtr, 'StringNotCamelCaps', $data);
+            $phpcsFile->addError($error, $stackPtr, self::CODE_STRING_DOES_NOT_MATCH_PATTERN, $data);
         }
     }
 
-    private function matchesRegex(string $varName): bool
+    private function matchesRegex(string $varName, string $pattern): bool
     {
-        return preg_match(sprintf('~%s~', $this->pattern), $varName) === 1;
+        return preg_match(sprintf('~%s~', $pattern), $varName) === 1;
     }
 }

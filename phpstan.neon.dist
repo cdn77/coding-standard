@@ -9,5 +9,6 @@ parameters:
         - %currentWorkingDirectory%
 
 includes:
+    - phpstan-baseline.neon
     - vendor/phpstan/phpstan-phpunit/rules.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon

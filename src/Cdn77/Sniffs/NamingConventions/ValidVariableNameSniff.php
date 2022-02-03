@@ -6,12 +6,13 @@ namespace Cdn77\Sniffs\NamingConventions;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
-use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Tokens;
 
 use function assert;
 use function ltrim;
+use function preg_match;
 use function preg_match_all;
+use function sprintf;
 use function strpos;
 use function substr;
 use function ucfirst;
@@ -25,6 +26,8 @@ use const T_WHITESPACE;
 
 class ValidVariableNameSniff extends AbstractVariableSniff
 {
+    public string $pattern = '\b[a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?\b';
+
     /**
      * Processes this test, when one of its tokens is encountered.
      *
@@ -68,7 +71,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                         $objVarName = substr($objVarName, 1);
                     }
 
-                    if (Common::isCamelCaps($objVarName, false, true, false) === false) {
+                    if (! $this->matchesRegex($objVarName)) {
                         $error = 'Member variable "%s" is not in valid camel caps format';
                         $data = [$originalVarName];
                         $phpcsFile->addError($error, $var, 'MemberNotCamelCaps', $data);
@@ -86,7 +89,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 $objVarName = substr($objVarName, 1);
             }
 
-            if (Common::isCamelCaps($objVarName, false, true, false) === false) {
+            if (! $this->matchesRegex($objVarName)) {
                 $error = 'Member variable "%s" is not in valid camel caps format';
                 $data = [$tokens[$stackPtr]['content']];
                 $phpcsFile->addError($error, $stackPtr, 'MemberNotCamelCaps', $data);
@@ -106,7 +109,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             }
         }
 
-        if (Common::isCamelCaps($varName, false, true, false) !== false) {
+        if ($this->matchesRegex($varName)) {
             return;
         }
 
@@ -158,7 +161,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         // Remove a potential underscore prefix for testing CamelCaps.
         $varName = ltrim($varName, '_');
 
-        if (Common::isCamelCaps($varName, false, true, false) !== false) {
+        if ($this->matchesRegex($varName)) {
             return;
         }
 
@@ -195,7 +198,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 continue;
             }
 
-            if (Common::isCamelCaps($varName, false, true, false) !== false) {
+            if ($this->matchesRegex($varName)) {
                 continue;
             }
 
@@ -203,5 +206,10 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             $data = [$varName];
             $phpcsFile->addError($error, $stackPtr, 'StringNotCamelCaps', $data);
         }
+    }
+
+    private function matchesRegex(string $varName): bool
+    {
+        return preg_match(sprintf('~%s~', $this->pattern), $varName) === 1;
     }
 }

@@ -50,7 +50,7 @@ class ValidVariableNameSniffTest extends TestCase
             67 => self::CODE_NOT_CAMEL_CAPS,
             81 => self::CODE_STRING_NOT_CAMEL_CAPS,
             106 => self::CODE_PUBLIC_HAS_UNDERSCORE,
-            107 => [self::CODE_PUBLIC_HAS_UNDERSCORE,self::CODE_MEMBER_NOT_CAMEL_CAPS],
+            107 => self::CODE_PUBLIC_HAS_UNDERSCORE,
             108 => self::CODE_PUBLIC_HAS_UNDERSCORE,
             111 => self::CODE_PRIVATE_NO_UNDERSCORE,
             112 => self::CODE_PRIVATE_NO_UNDERSCORE,
@@ -78,6 +78,6 @@ class ValidVariableNameSniffTest extends TestCase
             }
         }
 
-        self::assertSame(38, $file->getErrorCount());
+        self::assertSame(37, $file->getErrorCount());
     }
 }

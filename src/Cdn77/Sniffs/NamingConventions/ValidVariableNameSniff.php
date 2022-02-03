@@ -144,18 +144,13 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         $public = ($memberProps['scope'] !== 'private');
         $errorData = [$varName];
 
-        if ($public === true) {
-            if (strpos($varName, '_') === 0) {
-                $error = '%s member variable "%s" must not contain a leading underscore';
-                $data = [
-                    ucfirst($memberProps['scope']),
-                    $errorData[0],
-                ];
-                $phpcsFile->addError($error, $stackPtr, 'PublicHasUnderscore', $data);
-            }
-        } elseif (strpos($varName, '_') !== 0) {
-            $error = 'Private member variable "%s" must contain a leading underscore';
-            $phpcsFile->addError($error, $stackPtr, 'PrivateNoUnderscore', $errorData);
+        if (($public === true) && strpos($varName, '_') === 0) {
+            $error = '%s member variable "%s" must not contain a leading underscore';
+            $data = [
+                ucfirst($memberProps['scope']),
+                $errorData[0],
+            ];
+            $phpcsFile->addError($error, $stackPtr, 'PublicHasUnderscore', $data);
         }
 
         // Remove a potential underscore prefix for testing CamelCaps.

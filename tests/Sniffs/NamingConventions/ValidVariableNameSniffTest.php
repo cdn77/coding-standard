@@ -17,7 +17,6 @@ class ValidVariableNameSniffTest extends TestCase
     public const CODE_NOT_CAMEL_CAPS = 'NotCamelCaps';
     public const CODE_MEMBER_NOT_CAMEL_CAPS = 'MemberNotCamelCaps';
     public const CODE_PUBLIC_HAS_UNDERSCORE = 'PublicHasUnderscore';
-    public const CODE_PRIVATE_NO_UNDERSCORE = 'PrivateNoUnderscore';
     public const CODE_STRING_NOT_CAMEL_CAPS = 'StringNotCamelCaps';
 
     public function testErrors(): void
@@ -34,7 +33,6 @@ class ValidVariableNameSniffTest extends TestCase
             20 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             22 => self::CODE_PUBLIC_HAS_UNDERSCORE,
             25 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
-            27 => self::CODE_PRIVATE_NO_UNDERSCORE,
             31 => self::CODE_NOT_CAMEL_CAPS,
             33 => self::CODE_NOT_CAMEL_CAPS,
             36 => self::CODE_STRING_NOT_CAMEL_CAPS,
@@ -52,10 +50,6 @@ class ValidVariableNameSniffTest extends TestCase
             106 => self::CODE_PUBLIC_HAS_UNDERSCORE,
             107 => self::CODE_PUBLIC_HAS_UNDERSCORE,
             108 => self::CODE_PUBLIC_HAS_UNDERSCORE,
-            111 => self::CODE_PRIVATE_NO_UNDERSCORE,
-            112 => self::CODE_PRIVATE_NO_UNDERSCORE,
-            113 => self::CODE_PRIVATE_NO_UNDERSCORE,
-            114 => self::CODE_PRIVATE_NO_UNDERSCORE,
             123 => self::CODE_PUBLIC_HAS_UNDERSCORE,
             138 => self::CODE_NOT_CAMEL_CAPS,
             141 => self::CODE_NOT_CAMEL_CAPS,
@@ -79,6 +73,6 @@ class ValidVariableNameSniffTest extends TestCase
             }
         }
 
-        self::assertSame(38, $file->getErrorCount());
+        self::assertSame(33, $file->getErrorCount());
     }
 }

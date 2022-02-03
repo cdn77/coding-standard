@@ -6,16 +6,12 @@ namespace Cdn77\Sniffs\NamingConventions;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
-use PHP_CodeSniffer\Util\Tokens;
 
 use function assert;
 use function ltrim;
 use function preg_match;
 use function preg_match_all;
 use function sprintf;
-use function strpos;
-use function substr;
-use function ucfirst;
 
 use const T_DOUBLE_COLON;
 use const T_NULLSAFE_OBJECT_OPERATOR;
@@ -63,17 +59,9 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                 if ($tokens[$bracket]['code'] !== T_OPEN_PARENTHESIS) {
                     $objVarName = $tokens[$var]['content'];
 
-                    // There is no way for us to know if the var is public or
-                    // private, so we have to ignore a leading underscore if there is
-                    // one and just check the main part of the variable name.
-                    $originalVarName = $objVarName;
-                    if (strpos($objVarName, '_') === 0) {
-                        $objVarName = substr($objVarName, 1);
-                    }
-
                     if (! $this->matchesRegex($objVarName)) {
                         $error = 'Member variable "%s" is not in valid camel caps format';
-                        $data = [$originalVarName];
+                        $data = [$objVarName];
                         $phpcsFile->addError($error, $var, 'MemberNotCamelCaps', $data);
                     }
                 }
@@ -82,14 +70,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
 
         $objOperator = $phpcsFile->findPrevious(T_WHITESPACE, $stackPtr - 1, null, true);
         if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {
-            // The variable lives within a class, and is referenced like
-            // this: MyClass::$_variable, so we don't know its scope.
-            $objVarName = $varName;
-            if (strpos($objVarName, '_') === 0) {
-                $objVarName = substr($objVarName, 1);
-            }
-
-            if (! $this->matchesRegex($objVarName)) {
+            if (! $this->matchesRegex($varName)) {
                 $error = 'Member variable "%s" is not in valid camel caps format';
                 $data = [$tokens[$stackPtr]['content']];
                 $phpcsFile->addError($error, $stackPtr, 'MemberNotCamelCaps', $data);
@@ -98,23 +79,12 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             return;
         }
 
-        // There is no way for us to know if the var is public or private,
-        // so we have to ignore a leading underscore if there is one and just
-        // check the main part of the variable name.
-        $originalVarName = $varName;
-        if (strpos($varName, '_') === 0) {
-            $inClass = $phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens);
-            if ($inClass === true) {
-                $varName = substr($varName, 1);
-            }
-        }
-
         if ($this->matchesRegex($varName)) {
             return;
         }
 
         $error = 'Variable "%s" is not in valid camel caps format';
-        $data = [$originalVarName];
+        $data = [$varName];
         $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
     }
 
@@ -141,20 +111,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             return;
         }
 
-        $public = ($memberProps['scope'] !== 'private');
         $errorData = [$varName];
-
-        if (($public === true) && strpos($varName, '_') === 0) {
-            $error = '%s member variable "%s" must not contain a leading underscore';
-            $data = [
-                ucfirst($memberProps['scope']),
-                $errorData[0],
-            ];
-            $phpcsFile->addError($error, $stackPtr, 'PublicHasUnderscore', $data);
-        }
-
-        // Remove a potential underscore prefix for testing CamelCaps.
-        $varName = ltrim($varName, '_');
 
         if ($this->matchesRegex($varName)) {
             return;

@@ -27,12 +27,14 @@ class ValidVariableNameSniffTest extends TestCase
             3 => self::CODE_NOT_CAMEL_CAPS,
             5 => self::CODE_NOT_CAMEL_CAPS,
             10 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
-            12 => self::CODE_PUBLIC_HAS_UNDERSCORE,
+            12 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             15 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
-            17 => self::CODE_PUBLIC_HAS_UNDERSCORE,
+            17 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             20 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
-            22 => self::CODE_PUBLIC_HAS_UNDERSCORE,
+            22 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            24 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             25 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            26 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             31 => self::CODE_NOT_CAMEL_CAPS,
             33 => self::CODE_NOT_CAMEL_CAPS,
             36 => self::CODE_STRING_NOT_CAMEL_CAPS,
@@ -41,19 +43,25 @@ class ValidVariableNameSniffTest extends TestCase
             42 => self::CODE_NOT_CAMEL_CAPS,
             44 => self::CODE_NOT_CAMEL_CAPS,
             53 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            55 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             58 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            60 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             62 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             63 => self::CODE_NOT_CAMEL_CAPS,
             64 => self::CODE_NOT_CAMEL_CAPS,
             67 => self::CODE_NOT_CAMEL_CAPS,
             81 => self::CODE_STRING_NOT_CAMEL_CAPS,
-            106 => self::CODE_PUBLIC_HAS_UNDERSCORE,
-            107 => self::CODE_PUBLIC_HAS_UNDERSCORE,
-            108 => self::CODE_PUBLIC_HAS_UNDERSCORE,
-            123 => self::CODE_PUBLIC_HAS_UNDERSCORE,
+            106 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            107 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            108 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            123 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            124 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            134 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             138 => self::CODE_NOT_CAMEL_CAPS,
+            140 => self::CODE_NOT_CAMEL_CAPS,
             141 => self::CODE_NOT_CAMEL_CAPS,
             146 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
+            148 => self::CODE_MEMBER_NOT_CAMEL_CAPS,
             150 => [self::CODE_NOT_CAMEL_CAPS, self::CODE_NOT_CAMEL_CAPS],
             152 => self::CODE_NOT_CAMEL_CAPS,
         ];
@@ -73,6 +81,6 @@ class ValidVariableNameSniffTest extends TestCase
             }
         }
 
-        self::assertSame(33, $file->getErrorCount());
+        self::assertSame(43, $file->getErrorCount());
     }
 }

@@ -2,7 +2,6 @@ parameters:
     bootstrap: %currentWorkingDirectory%/tests/bootstrap.php
     level: max
     excludes_analyse:
-        - %currentWorkingDirectory%/src/Cdn77/Sniffs/Arrays/ArrayDeclarationSniff.php # todo remove
         - %currentWorkingDirectory%/tests/*/data/*
         - %currentWorkingDirectory%/vendor
     paths:

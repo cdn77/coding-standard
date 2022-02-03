@@ -5,12 +5,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Cdn77\\Sniffs\\": "src/Cdn77/Sniffs"
+            "Cdn77\\": "src/Cdn77"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Cdn77\\Sniffs\\Tests\\": "tests/Sniffs"
+            "Cdn77\\": "tests"
         }
     },
     "require": {

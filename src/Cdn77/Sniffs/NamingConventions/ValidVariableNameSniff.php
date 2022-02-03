@@ -26,7 +26,7 @@ use const T_WHITESPACE;
 
 class ValidVariableNameSniff extends AbstractVariableSniff
 {
-    public string $pattern = '\b[a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?\b';
+    public string $pattern = '\b(([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)|_+)\b';
 
     /**
      * Processes this test, when one of its tokens is encountered.

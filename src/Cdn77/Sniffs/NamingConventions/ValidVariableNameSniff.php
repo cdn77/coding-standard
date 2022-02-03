@@ -35,8 +35,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      * Processes this test, when one of its tokens is encountered.
      *
      * @param File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the current token in the
-     *                                               stack passed in $tokens.
+     * @param int  $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
@@ -99,8 +98,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      * Processes class member variables.
      *
      * @param File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the current token in the
-     *                                               stack passed in $tokens.
+     * @param int  $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
@@ -132,8 +130,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      * Processes the variable found within a double quoted string.
      *
      * @param File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr  The position of the double quoted
-     *                                               string.
+     * @param int  $stackPtr  The position of the double quoted string.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */

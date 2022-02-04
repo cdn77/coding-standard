@@ -25,11 +25,12 @@ class ValidVariableNameSniff extends AbstractVariableSniff
     public const CODE_DOES_NOT_MATCH_PATTERN = 'DoesNotMatchPattern';
     public const CODE_MEMBER_DOES_NOT_MATCH_PATTERN = 'MemberDoesNotMatchPattern';
     public const CODE_STRING_DOES_NOT_MATCH_PATTERN = 'StringDoesNotMatchPattern';
+    private const PATTERN_CAMEL_CASE = '\b([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)\b';
     private const PATTERN_CAMEL_CASE_OR_UNUSED = '\b(([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)|_+)\b';
 
     public string $pattern = self::PATTERN_CAMEL_CASE_OR_UNUSED;
-    public string $memberPattern = self::PATTERN_CAMEL_CASE_OR_UNUSED;
-    public string $stringPattern = self::PATTERN_CAMEL_CASE_OR_UNUSED;
+    public string $memberPattern = self::PATTERN_CAMEL_CASE;
+    public string $stringPattern = self::PATTERN_CAMEL_CASE;
 
     /**
      * Processes this test, when one of its tokens is encountered.

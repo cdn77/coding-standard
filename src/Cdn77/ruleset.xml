@@ -24,7 +24,8 @@
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
 
         <!-- $_ variables are used to tell e.g. psalm that the variable is intentionally unused. -->
-        <exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps" />
+        <!-- replaced by Cdn77.NamingConventions.ValidVariableName -->
+        <exclude name="Squiz.NamingConventions.ValidVariableName" />
 
         <!-- replaced by SlevomatCodingStandard.Commenting.RequireOneLineDocComment -->
         <exclude name="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"/>
@@ -34,6 +35,8 @@
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingTraversableTypeHintSpecification" />
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />
     </rule>
+
+    <rule ref="Cdn77.NamingConventions.ValidVariableName"/>
 
     <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
     <rule ref="SlevomatCodingStandard.Classes.ClassStructure">

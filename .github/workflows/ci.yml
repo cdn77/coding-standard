@@ -5,8 +5,7 @@ on:
   push:
     branches:
       - "master"
-  schedule:
-    - cron: "0 17 * * *"
+  workflow_dispatch:
 
 jobs:
   coding-standard:

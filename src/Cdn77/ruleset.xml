@@ -98,7 +98,6 @@
     </rule>
     <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction" />
     <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration" />
-    <rule ref="SlevomatCodingStandard.PHP.RequireNowdoc" />
 
     <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat">
         <properties>

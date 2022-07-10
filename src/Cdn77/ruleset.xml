@@ -99,14 +99,6 @@
     <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction" />
     <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration" />
 
-    <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat">
-        <properties>
-            <property name="withSpaces" value="no" />
-            <property name="shortNullable" value="no" />
-            <property name="nullPosition" value="last" />
-        </properties>
-    </rule>
-
     <rule ref="Squiz.WhiteSpace.OperatorSpacing">
         <properties>
             <property name="ignoreNewlines" value="true"/>

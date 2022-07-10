@@ -1,5 +1,6 @@
 parameters:
-    bootstrap: %currentWorkingDirectory%/tests/bootstrap.php
+    bootstrapFiles:
+        - %currentWorkingDirectory%/tests/bootstrap.php
     level: max
     excludes_analyse:
         - %currentWorkingDirectory%/tests/*/data/*

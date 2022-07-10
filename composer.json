@@ -20,9 +20,9 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "phpstan/phpstan": "^0.12.51",
-        "phpstan/phpstan-phpunit": "^0.12.16",
-        "phpstan/phpstan-strict-rules": "^0.12.5",
+        "phpstan/phpstan": "^1.0.0",
+        "phpstan/phpstan-phpunit": "^1.0.0",
+        "phpstan/phpstan-strict-rules": "^1.0.0",
         "phpunit/phpunit": "^9.4"
     },
     "config": {

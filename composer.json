@@ -15,8 +15,8 @@
     },
     "require": {
         "php": "^8.0",
-        "doctrine/coding-standard": "^9.0",
-        "slevomat/coding-standard": "^7.2"
+        "doctrine/coding-standard": "10.0.x-dev",
+        "slevomat/coding-standard": "^8.2"
     },
     "require-dev": {
         "ext-json": "*",

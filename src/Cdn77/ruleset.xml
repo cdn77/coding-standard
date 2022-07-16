@@ -74,7 +74,6 @@
             "/>
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.Classes.ConstantSpacing"/>
     <rule ref="SlevomatCodingStandard.Classes.ParentCallSpacing"/>
     <rule ref="SlevomatCodingStandard.Classes.PropertySpacing"/>
     <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion" />

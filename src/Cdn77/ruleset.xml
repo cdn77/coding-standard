@@ -26,6 +26,9 @@
 
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
 
+        <!-- replaced by Cdn77.NamingConventions.ValidConstantName -->
+        <exclude name="Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase" />
+
         <!-- $_ variables are used to tell e.g. psalm that the variable is intentionally unused. -->
         <!-- replaced by Cdn77.NamingConventions.ValidVariableName -->
         <exclude name="Squiz.NamingConventions.ValidVariableName" />
@@ -39,6 +42,7 @@
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />
     </rule>
 
+    <rule ref="Cdn77.NamingConventions.ValidConstantName"/>
     <rule ref="Cdn77.NamingConventions.ValidVariableName"/>
 
     <rule ref="SlevomatCodingStandard.Classes.ClassStructure">

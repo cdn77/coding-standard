@@ -41,7 +41,6 @@
 
     <rule ref="Cdn77.NamingConventions.ValidVariableName"/>
 
-    <rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
     <rule ref="SlevomatCodingStandard.Classes.ClassStructure">
         <properties>
             <property name="groups" type="array" value="

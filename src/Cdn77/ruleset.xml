@@ -92,7 +92,6 @@
             </property>
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch" />
     <rule ref="SlevomatCodingStandard.Files.LineLength">
         <properties>
             <property name="ignoreComments" value="true" />

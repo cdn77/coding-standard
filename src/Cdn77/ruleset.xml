@@ -16,6 +16,9 @@
     <rule ref="Doctrine">
         <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
 
+        <!-- Don't scream. There's no reason. Write a prose. -->
+        <exclude name="Generic.NamingConventions.UpperCaseConstantName"/>
+
         <!-- Allow extends on a new line, compatibility with SlevomatCodingStandard.Files.LineLength-->
         <exclude name="PSR2.Classes.ClassDeclaration.ExtendsLine" />
         <!-- Allow implements on a new line, compatibility with SlevomatCodingStandard.Files.LineLength-->

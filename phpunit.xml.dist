@@ -8,6 +8,11 @@
     colors="true"
     bootstrap="tests/bootstrap.php"
 >
+    <coverage>
+        <include>
+            <directory suffix=".php">src/</directory>
+        </include>
+    </coverage>
     <testsuite name="Cdn77 Coding Standard">
         <directory>tests</directory>
     </testsuite>

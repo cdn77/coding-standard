@@ -2,7 +2,7 @@ parameters:
     bootstrapFiles:
         - %currentWorkingDirectory%/tests/bootstrap.php
     level: max
-    excludes_analyse:
+    excludePaths:
         - %currentWorkingDirectory%/tests/*/data/*
         - %currentWorkingDirectory%/vendor
     paths:

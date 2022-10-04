@@ -1,12 +1,2 @@
 parameters:
 	ignoreErrors:
-		-
-			message: "#^Constant T_OPEN_PARENTHESIS not found\\.$#"
-			count: 1
-			path: src/Cdn77/Sniffs/NamingConventions/ValidVariableNameSniff.php
-
-		-
-			message: "#^Used constant T_OPEN_PARENTHESIS not found\\.$#"
-			count: 1
-			path: src/Cdn77/Sniffs/NamingConventions/ValidVariableNameSniff.php
-

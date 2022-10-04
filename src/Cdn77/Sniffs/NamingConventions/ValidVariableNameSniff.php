@@ -22,15 +22,15 @@ use const T_WHITESPACE;
 
 class ValidVariableNameSniff extends AbstractVariableSniff
 {
-    public const CODE_DOES_NOT_MATCH_PATTERN = 'DoesNotMatchPattern';
-    public const CODE_MEMBER_DOES_NOT_MATCH_PATTERN = 'MemberDoesNotMatchPattern';
-    public const CODE_STRING_DOES_NOT_MATCH_PATTERN = 'StringDoesNotMatchPattern';
-    private const PATTERN_CAMEL_CASE = '\b([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)\b';
-    private const PATTERN_CAMEL_CASE_OR_UNUSED = '\b(([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)|_+)\b';
+    public const CodeDoesNotMatchPattern = 'DoesNotMatchPattern';
+    public const CodeMemberDoesNotMatchPattern = 'MemberDoesNotMatchPattern';
+    public const CodeStringDoesNotMatchPattern = 'StringDoesNotMatchPattern';
+    private const PatternCamelCase = '\b([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)\b';
+    private const PatternCamelCaseOrUnused = '\b(([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)|_+)\b';
 
-    public string $pattern = self::PATTERN_CAMEL_CASE_OR_UNUSED;
-    public string $memberPattern = self::PATTERN_CAMEL_CASE;
-    public string $stringPattern = self::PATTERN_CAMEL_CASE;
+    public string $pattern = self::PatternCamelCaseOrUnused;
+    public string $memberPattern = self::PatternCamelCase;
+    public string $stringPattern = self::PatternCamelCase;
 
     /**
      * Processes this test, when one of its tokens is encountered.
@@ -69,7 +69,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
                     if (! $this->matchesRegex($objVarName, $this->memberPattern)) {
                         $error = sprintf('Member variable "%%s" does not match pattern "%s"', $this->memberPattern);
                         $data = [$objVarName];
-                        $phpcsFile->addError($error, $var, self::CODE_MEMBER_DOES_NOT_MATCH_PATTERN, $data);
+                        $phpcsFile->addError($error, $var, self::CodeMemberDoesNotMatchPattern, $data);
                     }
                 }
             }
@@ -80,7 +80,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             if (! $this->matchesRegex($varName, $this->memberPattern)) {
                 $error = sprintf('Member variable "%%s" does not match pattern "%s"', $this->memberPattern);
                 $data = [$tokens[$stackPtr]['content']];
-                $phpcsFile->addError($error, $stackPtr, self::CODE_MEMBER_DOES_NOT_MATCH_PATTERN, $data);
+                $phpcsFile->addError($error, $stackPtr, self::CodeMemberDoesNotMatchPattern, $data);
             }
 
             return;
@@ -92,7 +92,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
 
         $error = sprintf('Variable "%%s" does not match pattern "%s"', $this->pattern);
         $data = [$varName];
-        $phpcsFile->addError($error, $stackPtr, self::CODE_DOES_NOT_MATCH_PATTERN, $data);
+        $phpcsFile->addError($error, $stackPtr, self::CodeDoesNotMatchPattern, $data);
     }
 
     /**
@@ -124,7 +124,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         }
 
         $error = sprintf('Member variable "%%s" does not match pattern "%s"', $this->memberPattern);
-        $phpcsFile->addError($error, $stackPtr, self::CODE_MEMBER_DOES_NOT_MATCH_PATTERN, $errorData);
+        $phpcsFile->addError($error, $stackPtr, self::CodeMemberDoesNotMatchPattern, $errorData);
     }
 
     /**
@@ -161,7 +161,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
 
             $error = sprintf('Variable "%%s" does not match pattern "%s"', $this->stringPattern);
             $data = [$varName];
-            $phpcsFile->addError($error, $stackPtr, self::CODE_STRING_DOES_NOT_MATCH_PATTERN, $data);
+            $phpcsFile->addError($error, $stackPtr, self::CodeStringDoesNotMatchPattern, $data);
         }
     }
 

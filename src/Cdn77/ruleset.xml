@@ -77,7 +77,6 @@
             "/>
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.Classes.PropertySpacing"/>
     <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion" />
     <!-- Not accepted in upstream https://github.com/doctrine/coding-standard/pull/280 -->
     <rule ref="SlevomatCodingStandard.Classes.RequireSingleLineMethodSignature"/>

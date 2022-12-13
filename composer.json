@@ -20,6 +20,7 @@
     },
     "require-dev": {
         "ext-json": "*",
+        "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "^1.0.0",
         "phpstan/phpstan-phpunit": "^1.0.0",
         "phpstan/phpstan-strict-rules": "^1.0.0",
@@ -27,7 +28,8 @@
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     }

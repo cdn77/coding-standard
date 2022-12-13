@@ -18,7 +18,6 @@
         "doctrine/coding-standard": "^10.0"
     },
     "require-dev": {
-        "ext-json": "*",
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "^1.0.0",
         "phpstan/phpstan-phpunit": "^1.0.0",

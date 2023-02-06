@@ -60,20 +60,9 @@
                 static constructors,
                 destructor,
                 magic methods,
-                public static abstract methods,
-                public abstract methods,
-                public static final methods,
-                public static methods,
-                public final methods,
-                public methods,
-                protected static abstract methods,
-                protected abstract methods,
-                protected static final methods,
-                protected static methods,
-                protected final methods,
-                protected methods,
-                private static methods,
-                private methods,
+                all public methods,
+                all protected methods,
+                all private methods,
             "/>
         </properties>
     </rule>

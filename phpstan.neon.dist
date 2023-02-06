@@ -1,6 +1,8 @@
 parameters:
     bootstrapFiles:
-        - %currentWorkingDirectory%/tests/bootstrap.php
+        - %currentWorkingDirectory%/vendor/squizlabs/php_codesniffer/autoload.php
+        - %currentWorkingDirectory%/vendor/squizlabs/php_codesniffer/src/Util/Tokens.php
+
     level: max
     excludePaths:
         - %currentWorkingDirectory%/tests/*/data/*

@@ -33,6 +33,9 @@
         <!-- replaced by Cdn77.NamingConventions.ValidVariableName -->
         <exclude name="Squiz.NamingConventions.ValidVariableName" />
 
+        <!-- Allow single value arrays to span across multiple lines -->
+        <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed" />
+
         <!-- Tools like PHPStan or Psalm check these better -->
         <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification" />
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingTraversableTypeHintSpecification" />

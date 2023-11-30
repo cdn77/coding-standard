@@ -44,7 +44,7 @@ use const T_STRING;
  *       endPtr: int
  *  }
  */
-class AlphabeticallyOrderedConstantsSniff implements Sniff
+final class AlphabeticallyOrderedConstantsSniff implements Sniff
 {
     public const CodeIncorrectConstantOrder = 'IncorrectConstantOrder';
 

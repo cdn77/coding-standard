@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cdn77\Sniffs\OrderingConventions;
+namespace Cdn77\Sniffs\Ordering;
 
 use Cdn77\TestCase;
 
@@ -11,12 +11,11 @@ use function json_encode;
 
 use const JSON_THROW_ON_ERROR;
 
-class AlphabeticallyOrderedConstantsSniffTest extends TestCase
+final class AlphabeticallyOrderedConstantsSniffTest extends TestCase
 {
     public function testErrors(): void
     {
         $file = self::checkFile(__DIR__ . '/data/AlphabeticallyOrderedConstantsSniffTest.inc');
-
         $expectedErrors = [
             9 => AlphabeticallyOrderedConstantsSniff::CodeIncorrectConstantOrder,
             19 => AlphabeticallyOrderedConstantsSniff::CodeIncorrectConstantOrder,
@@ -33,5 +32,13 @@ class AlphabeticallyOrderedConstantsSniffTest extends TestCase
         }
 
         self::assertSame(3, $file->getErrorCount());
+
+        $file->disableCaching();
+        $file->fixer->fixFile();
+
+        self::assertStringEqualsFile(
+            __DIR__ . '/data/AlphabeticallyOrderedConstantsSniffTest.fixed.inc',
+            $file->fixer->getContents(),
+        );
     }
 }

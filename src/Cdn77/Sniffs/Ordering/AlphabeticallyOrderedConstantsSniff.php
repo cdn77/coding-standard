@@ -2,19 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Cdn77\Sniffs\OrderingConventions;
+namespace Cdn77\Sniffs\Ordering;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 use SlevomatCodingStandard\Helpers\FixerHelper;
 
+use function array_key_first;
 use function array_map;
-use function assert;
 use function implode;
 use function in_array;
-use function is_array;
-use function reset;
 use function sort;
 use function sprintf;
 use function ucfirst;
@@ -75,9 +73,7 @@ class AlphabeticallyOrderedConstantsSniff implements Sniff
                 continue;
             }
 
-            $firstNameWithValue = reset($namesWithValues);
-            assert(is_array($firstNameWithValue));
-
+            $firstNameWithValue = $namesWithValues[array_key_first($namesWithValues)];
             $fix = $phpcsFile->addFixableError(
                 sprintf('%s constant names are not alphabetically ordered.', ucfirst($visibility)),
                 $firstNameWithValue['name']['ptr'],
@@ -252,7 +248,7 @@ class AlphabeticallyOrderedConstantsSniff implements Sniff
         return [
             'content' => $content,
             'startPtr' => $startValueTokenPointer,
-            'endPtr' => $startValueTokenPointer,
+            'endPtr' => $endValueTokenPointer,
         ];
     }
 }

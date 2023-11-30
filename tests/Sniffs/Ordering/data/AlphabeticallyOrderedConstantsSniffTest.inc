@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cdn77\Sniffs\OrderingConventions\data;
+namespace Cdn77\Sniffs\Ordering\data;
 
-final class AlphabeticallyOrderedConstantsSniffTest
+final class TestClass
 {
     public const C = 'c';
     public const A = 'a';
@@ -13,7 +13,7 @@ final class AlphabeticallyOrderedConstantsSniffTest
         IgnoredMultiline1 = 1,
         IgnoredMultiline2 = 2;
 
-    public const D = 'd';
+    public const D = [123, 'test'];
     public const B = 'b';
 
     protected const H = 'h';

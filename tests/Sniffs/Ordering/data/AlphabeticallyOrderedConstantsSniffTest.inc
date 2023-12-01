@@ -16,10 +16,11 @@ final class TestClass
     public const D = [123, 'test'];
     public const B = 'b';
 
-    protected const H = 'h';
     protected const E = 'e';
     protected const G = 'g';
     protected const F = 'f';
+    protected const HB = 'h';
+    protected const Ha = 'h';
 
     private const K = 'k';
     private const J = 'j';

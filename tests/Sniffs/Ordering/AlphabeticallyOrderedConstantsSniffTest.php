@@ -19,7 +19,7 @@ final class AlphabeticallyOrderedConstantsSniffTest extends TestCase
         $expectedErrors = [
             9 => AlphabeticallyOrderedConstantsSniff::CodeIncorrectConstantOrder,
             19 => AlphabeticallyOrderedConstantsSniff::CodeIncorrectConstantOrder,
-            24 => AlphabeticallyOrderedConstantsSniff::CodeIncorrectConstantOrder,
+            25 => AlphabeticallyOrderedConstantsSniff::CodeIncorrectConstantOrder,
         ];
         $possibleLines = array_keys($expectedErrors);
         $errors = $file->getErrors();

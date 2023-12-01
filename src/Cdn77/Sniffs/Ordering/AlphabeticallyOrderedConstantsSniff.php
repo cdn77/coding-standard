@@ -15,6 +15,7 @@ use function implode;
 use function in_array;
 use function sort;
 use function sprintf;
+use function strtolower;
 use function ucfirst;
 use function usort;
 
@@ -36,6 +37,7 @@ use const T_STRING;
  *  }
  * @phpstan-type NameShape array{
  *       content: string,
+ *       lowercaseContent: string,
  *       ptr: int
  *  }
  * @phpstan-type ValueShape array{
@@ -63,7 +65,7 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
 
         foreach ($namesWithValuesByVisibility as $visibility => $namesWithValues) {
             $constantNames = array_map(
-                static fn (array $nameWithValue): string => $nameWithValue['name']['content'],
+                static fn (array $nameWithValue): string => $nameWithValue['name']['lowercaseContent'],
                 $namesWithValues,
             );
             $sortedConstantNames = $constantNames;
@@ -95,7 +97,7 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
         $sortedNameAndValueTokens = $namesWithValues;
         usort(
             $sortedNameAndValueTokens,
-            static fn (array $a, array $b): int => $a['name']['content'] <=> $b['name']['content'],
+            static fn (array $a, array $b): int => $a['name']['lowercaseContent'] <=> $b['name']['lowercaseContent'],
         );
 
         $fixer->beginChangeset();
@@ -184,7 +186,11 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
             return null;
         }
 
-        return ['content' => $tokens[$constantNameTokenPointer]['content'], 'ptr' => $constantNameTokenPointer];
+        return [
+            'content' => $tokens[$constantNameTokenPointer]['content'],
+            'lowercaseContent' => strtolower($tokens[$constantNameTokenPointer]['content']),
+            'ptr' => $constantNameTokenPointer,
+        ];
     }
 
     private function findEqualsPointer(File $phpcsFile, int $constNameStackPtr): int|null

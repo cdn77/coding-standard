@@ -19,7 +19,8 @@ final class TestClass
     protected const E = 'e';
     protected const F = 'f';
     protected const G = 'g';
-    protected const H = 'h';
+    protected const Ha = 'h';
+    protected const HB = 'h';
 
     private const I = 'i';
     private const J = 'j';

@@ -6,7 +6,7 @@ namespace Cdn77\Sniffs\Ordering\data;
 
 final class TestClass
 {
-    public const C = 'c';
+    public const C = 'c' . PHP_EOL;
     public const A = 'a';
 
     public const

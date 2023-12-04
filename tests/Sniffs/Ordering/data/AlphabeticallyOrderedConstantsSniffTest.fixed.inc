@@ -13,7 +13,7 @@ final class TestClass
         IgnoredMultiline1 = 1,
         IgnoredMultiline2 = 2;
 
-    public const C = 'c';
+    public const C = 'c' . PHP_EOL;
     public const D = [123, 'test'];
 
     protected const E = 'e';

@@ -19,16 +19,15 @@ use function strtolower;
 use function ucfirst;
 use function usort;
 
-use const T_ARRAY;
 use const T_CONST;
 use const T_EQUAL;
-use const T_OPEN_SHORT_ARRAY;
 use const T_OPEN_TAG;
 use const T_PRIVATE;
 use const T_PROTECTED;
 use const T_PUBLIC;
 use const T_SEMICOLON;
 use const T_STRING;
+use const T_WHITESPACE;
 
 /**
  * @phpstan-type NameWithValueShape array{
@@ -225,36 +224,23 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
             return null;
         }
 
-        $firstValueToken = $tokens[$startValueTokenPointer];
         $endValueTokenPointer = $startValueTokenPointer;
-        $content = $firstValueToken['content'];
+        $valueToken = $tokens[$endValueTokenPointer];
+        $values = [];
 
-        if (in_array($firstValueToken['code'], [T_ARRAY, T_OPEN_SHORT_ARRAY], true)) {
-            $values = [];
-            $endValueTokenPointer = $firstValueToken['bracket_closer'] ?? $firstValueToken['parenthesis_closer'];
-
-            for ($i = $startValueTokenPointer; $i <= $endValueTokenPointer; $i++) {
-                $values[] = $tokens[$i]['content'];
+        while ($valueToken['code'] !== T_SEMICOLON) {
+            if ($valueToken['code'] === T_WHITESPACE && $valueToken['content'] === "\n") {
+                return null;
             }
 
-            $content = implode('', $values);
-        }
-
-        $afterValueTokenPointer = $phpcsFile->findNext(
-            types: Tokens::$emptyTokens,
-            start: $endValueTokenPointer + 1,
-            exclude: true,
-            local: true,
-        );
-
-        if ($tokens[$afterValueTokenPointer]['code'] !== T_SEMICOLON) {
-            return null;
+            $values[] = $valueToken['content'];
+            $valueToken = $tokens[++$endValueTokenPointer];
         }
 
         return [
-            'content' => $content,
+            'content' => implode('', $values),
             'startPtr' => $startValueTokenPointer,
-            'endPtr' => $endValueTokenPointer,
+            'endPtr' => $endValueTokenPointer - 1,
         ];
     }
 }

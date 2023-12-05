@@ -229,7 +229,10 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
         $values = [];
 
         while ($valueToken['code'] !== T_SEMICOLON) {
-            if ($valueToken['code'] === T_WHITESPACE && $valueToken['content'] === "\n") {
+            if (
+                $valueToken['code'] === T_WHITESPACE
+                && in_array($valueToken['content'], ["\n", "\r\n", "\r"], true)
+            ) {
                 return null;
             }
 

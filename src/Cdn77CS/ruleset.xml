@@ -40,31 +40,6 @@
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion" />
-    <rule ref="SlevomatCodingStandard.Commenting.ForbiddenAnnotations">
-        <properties>
-            <property name="forbiddenAnnotations" type="array" extend="true">
-                <!-- Use attributes instead -->
-                <element value="@covers" />
-                <element value="@coversDefaultClass" />
-                <element value="@coversNothing" />
-                <element value="@depends" />
-                <element value="@doesNotPerformAssertions" />
-                <element value="@group" />
-                <element value="@large" />
-                <element value="@medium" />
-                <element value="@preserveGlobalState" />
-                <element value="@requires" />
-                <element value="@runInSeparateProcess" />
-                <element value="@runTestsInSeparateProcesses" />
-                <element value="@small" />
-                <element value="@test" />
-                <element value="@testDox" />
-                <element value="@testWith" />
-                <element value="@ticket" />
-                <element value="@uses" />
-            </property>
-        </properties>
-    </rule>
     <rule ref="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing">
         <properties>
             <property name="linesCountAfterWhenLastInCaseOrDefault" value="0"/>

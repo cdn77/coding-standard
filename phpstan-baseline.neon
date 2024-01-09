@@ -1,2 +1,31 @@
 parameters:
 	ignoreErrors:
+		-
+			message: "#^Cannot access offset 'properties' on mixed\\.$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Cannot access offset 'severity' on mixed\\.$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Method Cdn77\\\\TestCase\\:\\:checkFile\\(\\) has parameter \\$sniffConfig with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Method Cdn77\\\\TestCase\\:\\:getSniffClassReflection\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Method Cdn77\\\\TestCase\\:\\:getSniffName\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: "#^Parameter \\#3 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
+			count: 1
+			path: tests/TestCase.php

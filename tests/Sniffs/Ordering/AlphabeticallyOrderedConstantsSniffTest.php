@@ -15,7 +15,10 @@ final class AlphabeticallyOrderedConstantsSniffTest extends TestCase
 {
     public function testErrors(): void
     {
-        $file = self::checkFile(__DIR__ . '/data/AlphabeticallyOrderedConstantsSniffTest.inc');
+        $file = self::checkFile(
+            __DIR__ . '/data/AlphabeticallyOrderedConstantsSniffTest.inc',
+            sniffConfig: ['severity' => 5],
+        );
         $expectedErrors = [
             9 => AlphabeticallyOrderedConstantsSniff::CodeIncorrectConstantOrder,
             19 => AlphabeticallyOrderedConstantsSniff::CodeIncorrectConstantOrder,

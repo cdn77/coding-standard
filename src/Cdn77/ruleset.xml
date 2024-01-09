@@ -12,6 +12,10 @@
     <arg value="p"/>
     <arg value="s"/>
 
+    <rule ref="Cdn77.Ordering.AlphabeticallyOrderedConstants">
+        <severity>0</severity>
+    </rule>
+
     <!-- use Doctrine as the base standard -->
     <rule ref="Doctrine">
         <exclude name="Generic.Formatting.MultipleStatementAlignment"/>

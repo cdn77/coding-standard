@@ -12,6 +12,33 @@
     <arg value="p"/>
     <arg value="s"/>
 
+    <!-- use Doctrine as the base standard -->
+    <rule ref="Doctrine">
+        <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
+
+        <!-- Don't scream. There's no reason. Write a prose. -->
+        <exclude name="Generic.NamingConventions.UpperCaseConstantName"/>
+
+        <!-- Allow extends on a new line, compatibility with SlevomatCodingStandard.Files.LineLength-->
+        <exclude name="PSR2.Classes.ClassDeclaration.ExtendsLine" />
+        <!-- Allow implements on a new line, compatibility with SlevomatCodingStandard.Files.LineLength-->
+        <exclude name="PSR2.Classes.ClassDeclaration.ImplementsLine" />
+
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+
+        <!-- replaced by Cdn77.NamingConventions.ValidConstantName -->
+        <exclude name="Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase" />
+
+        <!-- $_ variables are used to tell e.g. psalm that the variable is intentionally unused. -->
+        <!-- replaced by Cdn77.NamingConventions.ValidVariableName -->
+        <exclude name="Squiz.NamingConventions.ValidVariableName" />
+
+        <!-- Tools like PHPStan or Psalm check these better -->
+        <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification" />
+        <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingTraversableTypeHintSpecification" />
+        <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />
+    </rule>
+
     <rule ref="Cdn77.NamingConventions.ValidConstantName"/>
     <rule ref="Cdn77.NamingConventions.ValidVariableName"/>
 

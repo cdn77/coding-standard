@@ -19,7 +19,6 @@ use function count;
 use function define;
 use function defined;
 use function in_array;
-use function preg_replace;
 use function sprintf;
 use function str_replace;
 use function strlen;
@@ -78,23 +77,6 @@ abstract class TestCase extends SlevomatTestCase
         $file->process();
 
         return $file;
-    }
-
-    private static function getSniffName(): string
-    {
-        return preg_replace(
-            [
-                '~\\\~',
-                '~\.Sniffs~',
-                '~Sniff$~',
-            ],
-            [
-                '.',
-                '',
-                '',
-            ],
-            static::getSniffClassName(),
-        );
     }
 
     private static function getSniffClassReflection(): ReflectionClass

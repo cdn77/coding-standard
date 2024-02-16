@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cdn77\Sniffs\NamingConventions;
 
 use Cdn77\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 use function array_keys;
 use function count;
@@ -12,6 +13,7 @@ use function json_encode;
 
 use const JSON_THROW_ON_ERROR;
 
+#[CoversClass(ValidConstantNameSniff::class)]
 class ValidConstantNameSniffTest extends TestCase
 {
     public function testErrors(): void

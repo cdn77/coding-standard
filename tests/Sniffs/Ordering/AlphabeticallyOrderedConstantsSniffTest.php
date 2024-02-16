@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Cdn77\Sniffs\Ordering;
 
 use Cdn77\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 use function array_keys;
 use function json_encode;
 
 use const JSON_THROW_ON_ERROR;
 
+#[CoversClass(AlphabeticallyOrderedConstantsSniff::class)]
 final class AlphabeticallyOrderedConstantsSniffTest extends TestCase
 {
     public function testErrors(): void

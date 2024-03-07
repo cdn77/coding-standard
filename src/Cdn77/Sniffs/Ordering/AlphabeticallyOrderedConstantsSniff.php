@@ -30,9 +30,18 @@ use const T_STRING;
 use const T_WHITESPACE;
 
 /**
- * @phpstan-type NameWithValueShape array{
+ * @phpstan-type TypeNameValueShape array{
+ *       type: TypeShape|null,
  *       name: NameShape,
  *       value: ValueShape
+ *  }
+ * @phpstan-type TypeNameShape array{
+ *       type: TypeShape|null,
+ *       name: NameShape
+ *  }
+ * @phpstan-type TypeShape array{
+ *       content: string,
+ *       ptr: int
  *  }
  * @phpstan-type NameShape array{
  *       content: string,
@@ -89,7 +98,7 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
         }
     }
 
-    /** @param list<NameWithValueShape> $namesWithValues */
+    /** @param list<TypeNameValueShape> $namesWithValues */
     private function fix(File $file, array $namesWithValues): void
     {
         $fixer = $file->fixer;
@@ -104,9 +113,19 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
         foreach ($namesWithValues as $key => $nameWithValue) {
             $sortedNameAndValueToken = $sortedNameAndValueTokens[$key];
 
+            $typePointer = $nameWithValue['type']['ptr'] ?? null;
             $namePointer = $nameWithValue['name']['ptr'];
-            FixerHelper::removeBetweenIncluding($file, $namePointer, $namePointer);
-            $fixer->addContent($namePointer, $sortedNameAndValueToken['name']['content']);
+            FixerHelper::removeBetweenIncluding($file, $typePointer ?? $namePointer, $namePointer);
+            $fixer->addContent(
+                $typePointer ?? $namePointer,
+                $sortedNameAndValueToken['type'] === null ?
+                    $sortedNameAndValueToken['name']['content']
+                    : sprintf(
+                        '%s %s',
+                        $sortedNameAndValueToken['type']['content'],
+                        $sortedNameAndValueToken['name']['content'],
+                    ),
+            );
 
             $value = $nameWithValue['value'];
             FixerHelper::removeBetweenIncluding($file, $value['startPtr'], $value['endPtr']);
@@ -116,7 +135,7 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
         $fixer->endChangeset();
     }
 
-    /** @return array<string, list<NameWithValueShape>> */
+    /** @return array<string, list<TypeNameValueShape>> */
     private function findConstantNamesWithValuesByVisibility(File $phpcsFile): array
     {
         $constantNamesWithValues = [];
@@ -128,13 +147,13 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
             }
 
             $visibility = $this->getVisibility($phpcsFile, $stackPtr);
-            $constantName = $this->findConstantName($phpcsFile, $stackPtr);
+            $typeAndConstantName = $this->findTypeAndConstantName($phpcsFile, $stackPtr);
 
-            if ($constantName === null) {
+            if ($typeAndConstantName === null) {
                 continue;
             }
 
-            $equalsTokenPointer = $this->findEqualsPointer($phpcsFile, $constantName['ptr']);
+            $equalsTokenPointer = $this->findEqualsPointer($phpcsFile, $typeAndConstantName['name']['ptr']);
 
             if ($equalsTokenPointer === null) {
                 continue;
@@ -147,7 +166,8 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
             }
 
             $constantNamesWithValues[$visibility][] = [
-                'name' => $constantName,
+                'type' => $typeAndConstantName['type'],
+                'name' => $typeAndConstantName['name'],
                 'value' => $value,
             ];
         }
@@ -170,25 +190,52 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
             : 'public';
     }
 
-    /** @phpstan-return NameShape|null */
-    private function findConstantName(File $phpcsFile, int $constStackPtr): array|null
+    /** @phpstan-return TypeNameShape|null */
+    private function findTypeAndConstantName(File $phpcsFile, int $constStackPtr): array|null
     {
         $tokens = $phpcsFile->getTokens();
-        $constantNameTokenPointer = $phpcsFile->findNext(
-            types: Tokens::$emptyTokens,
+        $assignmentOperatorTokenPtr = $phpcsFile->findNext(
+            types: [T_EQUAL, T_SEMICOLON],
             start: $constStackPtr + 1,
-            exclude: true,
-            local: true,
         );
 
-        if ($constantNameTokenPointer === false || $tokens[$constantNameTokenPointer]['code'] !== T_STRING) {
+        if ($assignmentOperatorTokenPtr === false || $tokens[$assignmentOperatorTokenPtr]['code'] !== T_EQUAL) {
             return null;
         }
 
+        $constNameTokenPtr = $phpcsFile->findPrevious(
+            types: Tokens::$emptyTokens,
+            start: $assignmentOperatorTokenPtr - 1,
+            end: $constStackPtr + 1,
+            exclude: true,
+        );
+
+        if ($constNameTokenPtr === false || $tokens[$constNameTokenPtr]['code'] !== T_STRING) {
+            return null;
+        }
+
+        $type = null;
+        $typeTokenPtr = $phpcsFile->findPrevious(
+            types: Tokens::$emptyTokens,
+            start: $constNameTokenPtr - 1,
+            end: $constStackPtr,
+            exclude: true,
+        );
+
+        if ($typeTokenPtr !== false && $tokens[$typeTokenPtr]['code'] === T_STRING) {
+            $type = [
+                'content' => $tokens[$typeTokenPtr]['content'],
+                'ptr' => $typeTokenPtr,
+            ];
+        }
+
         return [
-            'content' => $tokens[$constantNameTokenPointer]['content'],
-            'lowercaseContent' => strtolower($tokens[$constantNameTokenPointer]['content']),
-            'ptr' => $constantNameTokenPointer,
+            'type' => $type,
+            'name' => [
+                'content' => $tokens[$constNameTokenPtr]['content'],
+                'lowercaseContent' => strtolower($tokens[$constNameTokenPtr]['content']),
+                'ptr' => $constNameTokenPtr,
+            ],
         ];
     }
 

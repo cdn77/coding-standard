@@ -16,8 +16,8 @@ final class TestClass
     public const C = 'c' . PHP_EOL;
     public const D = [123, 'test'];
 
-    protected const E = 'e';
-    protected const F = 'f';
+    protected const string E = 'e';
+    protected const int F = 123;
     protected const G = 'g';
     protected const Ha = 'h';
     protected const HB = 'h';

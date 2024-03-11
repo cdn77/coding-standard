@@ -16,9 +16,9 @@ final class TestClass
     public const D = [123, 'test'];
     public const B = 'b';
 
-    protected const E = 'e';
     protected const G = 'g';
-    protected const F = 'f';
+    protected const string E = 'e';
+    protected const int F = 123;
     protected const HB = 'h';
     protected const Ha = 'h';
 

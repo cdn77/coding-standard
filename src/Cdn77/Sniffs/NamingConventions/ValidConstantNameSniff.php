@@ -55,6 +55,7 @@ class ValidConstantNameSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr): void
     {
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
 
         if ($tokens[$stackPtr]['code'] === T_CONST) {

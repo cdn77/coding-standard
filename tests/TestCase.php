@@ -81,6 +81,7 @@ abstract class TestCase extends SlevomatTestCase
 
     private static function getSniffClassReflection(): ReflectionClass
     {
+        /** @var array<string, ReflectionClass<object>> $reflections */
         static $reflections = [];
 
         $className = static::getSniffClassName();

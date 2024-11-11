@@ -42,6 +42,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      */
     protected function processVariable(File $phpcsFile, $stackPtr): void
     {
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
 
@@ -105,6 +106,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      */
     protected function processMemberVar(File $phpcsFile, $stackPtr): void
     {
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
 
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
@@ -137,6 +139,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
      */
     protected function processVariableInString(File $phpcsFile, $stackPtr): void
     {
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
 
         if (

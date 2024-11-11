@@ -139,6 +139,7 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
     private function findConstantNamesWithValuesByVisibility(File $phpcsFile): array
     {
         $constantNamesWithValues = [];
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
 
         foreach ($tokens as $stackPtr => $token) {
@@ -177,6 +178,7 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
 
     private function getVisibility(File $phpcsFile, int $constStackPtr): string
     {
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $visibilityTokenPointer = $phpcsFile->findPrevious(
             types: Tokens::$emptyTokens,
@@ -186,13 +188,14 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
         );
 
         return in_array($tokens[$visibilityTokenPointer]['code'], [T_PUBLIC, T_PROTECTED, T_PRIVATE], true)
-            ? (string) $tokens[$visibilityTokenPointer]['content']
+            ? $tokens[$visibilityTokenPointer]['content']
             : 'public';
     }
 
     /** @phpstan-return TypeNameShape|null */
     private function findTypeAndConstantName(File $phpcsFile, int $constStackPtr): array|null
     {
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $assignmentOperatorTokenPtr = $phpcsFile->findNext(
             types: [T_EQUAL, T_SEMICOLON],
@@ -241,6 +244,7 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
 
     private function findEqualsPointer(File $phpcsFile, int $constNameStackPtr): int|null
     {
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $equalsTokenPointer = $phpcsFile->findNext(
             types: Tokens::$emptyTokens,
@@ -259,6 +263,7 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
     /** @phpstan-return ValueShape|null */
     private function findValue(File $phpcsFile, int $equalsTokenPointer): array|null
     {
+        /** @var array<int, array{code: int|string, content: string}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $startValueTokenPointer = $phpcsFile->findNext(
             types: Tokens::$emptyTokens,

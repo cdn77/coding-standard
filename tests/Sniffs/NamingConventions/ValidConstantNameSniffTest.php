@@ -12,7 +12,6 @@ use function count;
 use function json_encode;
 
 use const JSON_THROW_ON_ERROR;
-use const PHP_VERSION_ID;
 
 #[CoversClass(ValidConstantNameSniff::class)]
 class ValidConstantNameSniffTest extends TestCase
@@ -45,10 +44,6 @@ class ValidConstantNameSniffTest extends TestCase
 
     public function testErrorsConstantType(): void
     {
-        if (PHP_VERSION_ID < 80300) {
-            self::markTestSkipped('Test requires PHP 8.3');
-        }
-
         $file = self::checkFile(__DIR__ . '/data/ValidConstantNameWithTypeTest.inc');
 
         $errorTypesPerLine = [

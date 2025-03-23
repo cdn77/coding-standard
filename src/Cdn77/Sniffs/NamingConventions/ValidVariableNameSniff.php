@@ -22,11 +22,11 @@ use const T_WHITESPACE;
 
 class ValidVariableNameSniff extends AbstractVariableSniff
 {
-    public const CodeDoesNotMatchPattern = 'DoesNotMatchPattern';
-    public const CodeMemberDoesNotMatchPattern = 'MemberDoesNotMatchPattern';
-    public const CodeStringDoesNotMatchPattern = 'StringDoesNotMatchPattern';
-    private const PatternCamelCase = '\b([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)\b';
-    private const PatternCamelCaseOrUnused = '\b(([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)|_+)\b';
+    public const string CodeDoesNotMatchPattern = 'DoesNotMatchPattern';
+    public const string CodeMemberDoesNotMatchPattern = 'MemberDoesNotMatchPattern';
+    public const string CodeStringDoesNotMatchPattern = 'StringDoesNotMatchPattern';
+    private const string PatternCamelCase = '\b([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)\b';
+    private const string PatternCamelCaseOrUnused = '\b(([a-zA-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)|_+)\b';
 
     public string $pattern = self::PatternCamelCaseOrUnused;
     public string $memberPattern = self::PatternCamelCase;

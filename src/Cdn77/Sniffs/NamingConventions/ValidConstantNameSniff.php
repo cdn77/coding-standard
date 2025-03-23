@@ -26,9 +26,9 @@ use const T_WHITESPACE;
 
 class ValidConstantNameSniff implements Sniff
 {
-    public const CodeClassConstantNotMatchPattern = 'ClassConstantNotUpperCase';
-    public const CodeConstantNotMatchPattern = 'ConstantNotUpperCase';
-    private const PatternPascalCase = '\b([A-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)\b';
+    public const string CodeClassConstantNotMatchPattern = 'ClassConstantNotUpperCase';
+    public const string CodeConstantNotMatchPattern = 'ConstantNotUpperCase';
+    private const string PatternPascalCase = '\b([A-Z][a-zA-Z0-9]*?([A-Z][a-zA-Z0-9]*?)*?)\b';
 
     public string $pattern = self::PatternPascalCase;
 

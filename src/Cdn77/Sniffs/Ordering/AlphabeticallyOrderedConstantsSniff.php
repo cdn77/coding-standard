@@ -56,7 +56,7 @@ use const T_WHITESPACE;
  */
 final class AlphabeticallyOrderedConstantsSniff implements Sniff
 {
-    public const CodeIncorrectConstantOrder = 'IncorrectConstantOrder';
+    public const string CodeIncorrectConstantOrder = 'IncorrectConstantOrder';
 
     public function register(): array
     {

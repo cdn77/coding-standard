@@ -30,9 +30,6 @@
 
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
 
-        <!-- https://github.com/doctrine/coding-standard/pull/339 -->
-        <exclude name="Squiz.WhiteSpace.LanguageConstructSpacing" />
-
         <!-- replaced by Cdn77.NamingConventions.ValidConstantName -->
         <exclude name="Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase" />
 
@@ -45,9 +42,6 @@
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingTraversableTypeHintSpecification" />
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />
     </rule>
-
-    <!-- https://github.com/doctrine/coding-standard/pull/339 -->
-    <rule ref="Generic.WhiteSpace.LanguageConstructSpacing" />
 
     <rule ref="SlevomatCodingStandard.Classes.ClassStructure">
         <properties>

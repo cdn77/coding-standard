@@ -16,7 +16,7 @@
     "require": {
         "php": "^8.3",
         "doctrine/coding-standard": "^13.0.1",
-        "slevomat/coding-standard": "^8.19.1",
+        "slevomat/coding-standard": "^8.21.1",
         "squizlabs/php_codesniffer": "^3.13"
     },
     "require-dev": {

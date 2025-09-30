@@ -83,6 +83,10 @@ final class AlphabeticallyOrderedConstantsSniff implements Sniff
                 continue;
             }
 
+            if ($namesWithValues === []) {
+                continue;
+            }
+
             $firstNameWithValue = $namesWithValues[array_key_first($namesWithValues)];
             $fix = $phpcsFile->addFixableError(
                 sprintf('%s constant names are not alphabetically ordered.', ucfirst($visibility)),

@@ -149,18 +149,22 @@ $var = Potato::new();
 
 class PropertyHookClass
 {
-    private string $backing = '';
+    private string|null $resolved = null;
+    private bool $isResolved = false;
 
-    public string $hooked {
-        get {
-            return $this->backing;
-        }
-        set {
-            $this->backing = $value;
-        }
+    public function __construct(
+        private readonly Closure $provider,
+    ) {
     }
 
-    public string|null $virtualHook {
-        get => $this->backing;
+    public string|null $hooked {
+        get {
+            if (! $this->isResolved) {
+                $this->resolved = ($this->provider)();
+                $this->isResolved = true;
+            }
+
+            return $this->resolved;
+        }
     }
 }

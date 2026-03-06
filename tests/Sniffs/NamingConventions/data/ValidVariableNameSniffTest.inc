@@ -146,3 +146,21 @@ $var_name . $var_name;
 fn($_, $__, $_x) => true;
 
 $var = Potato::new();
+
+class PropertyHookClass
+{
+    private string $backing = '';
+
+    public string $hooked {
+        get {
+            return $this->backing;
+        }
+        set {
+            $this->backing = $value;
+        }
+    }
+
+    public string|null $virtualHook {
+        get => $this->backing;
+    }
+}

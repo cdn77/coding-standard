@@ -146,3 +146,25 @@ $var_name . $var_name;
 fn($_, $__, $_x) => true;
 
 $var = Potato::new();
+
+class PropertyHookClass
+{
+    private string|null $resolved = null;
+    private bool $isResolved = false;
+
+    public function __construct(
+        private readonly Closure $provider,
+    ) {
+    }
+
+    public string|null $hooked {
+        get {
+            if (! $this->isResolved) {
+                $this->resolved = ($this->provider)();
+                $this->isResolved = true;
+            }
+
+            return $this->resolved;
+        }
+    }
+}

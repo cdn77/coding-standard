@@ -6,6 +6,7 @@ namespace Cdn77\Sniffs\NamingConventions;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
+use RuntimeException;
 
 use function assert;
 use function ltrim;
@@ -110,7 +111,13 @@ class ValidVariableNameSniff extends AbstractVariableSniff
         $tokens = $phpcsFile->getTokens();
 
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
-        $memberProps = $phpcsFile->getMemberProperties($stackPtr);
+
+        try {
+            $memberProps = $phpcsFile->getMemberProperties($stackPtr);
+        } catch (RuntimeException) {
+            return;
+        }
+
         if ($memberProps === []) {
             // Couldn't get any info about this variable, which
             // generally means it is invalid or possibly has a parse

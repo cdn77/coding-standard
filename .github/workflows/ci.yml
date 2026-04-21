@@ -24,7 +24,7 @@ jobs:
           tools: cs2pr
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v1"
+        uses: "ramsey/composer-install@4.0.0"
 
       - name: Coding Standard
         env:
@@ -47,7 +47,7 @@ jobs:
           tools: cs2pr
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v1"
+        uses: "ramsey/composer-install@4.0.0"
 
       - name: PHPStan
         env:
@@ -79,7 +79,7 @@ jobs:
           extensions: json, mbstring
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v1"
+        uses: "ramsey/composer-install@4.0.0"
         with:
           dependency-versions: "${{ matrix.dependencies }}"
 

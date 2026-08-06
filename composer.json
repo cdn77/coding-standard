@@ -17,7 +17,7 @@
         "php": "^8.4",
         "doctrine/coding-standard": "^14",
         "slevomat/coding-standard": "^8.30",
-        "squizlabs/php_codesniffer": "^4"
+        "squizlabs/php_codesniffer": "^4.0.4"
     },
     "require-dev": {
         "phpstan/extension-installer": "^1.2",

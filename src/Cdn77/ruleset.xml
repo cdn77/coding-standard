@@ -43,6 +43,27 @@
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />
     </rule>
 
+    <!-- Backport Doctrine 15.0.x rules while Cdn77 is based on Doctrine 14. -->
+    <rule ref="SlevomatCodingStandard.Classes.ClassKeywordOrder"/>
+    <rule ref="SlevomatCodingStandard.Classes.TraitUseOrder"/>
+    <rule ref="SlevomatCodingStandard.Commenting.RequireOneDocComment"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit">
+        <properties>
+            <property name="ignoreTrailingIfWithOneInstruction" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Exceptions.CatchExceptionsOrder"/>
+    <rule ref="SlevomatCodingStandard.PHP.UselessParentheses">
+        <properties>
+            <property name="enableCheckAroundNew" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.DNFTypeHintFormat">
+        <properties>
+            <property name="enableForDocComments" value="true"/>
+        </properties>
+    </rule>
+
     <rule ref="SlevomatCodingStandard.Classes.ClassStructure">
         <properties>
             <property name="groups" type="array">

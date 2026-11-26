@@ -1,5 +1,9 @@
-Cdn77 Coding Standard [![Build Status](https://github.com/cdn77/coding-standard/actions/workflows/ci.yml/badge.svg?branch=7.0.x)](https://github.com/cdn77/coding-standard/actions)
+Cdn77 Coding Standard
 =====================
+
+[![Build Status](https://github.com/cdn77/coding-standard/actions/workflows/ci.yml/badge.svg?branch=7.0.x)](https://github.com/cdn77/coding-standard/actions)
+[![Latest Stable Version](https://poser.pugx.org/cdn77/coding-standard/v/stable)](https://packagist.org/packages/cdn77/coding-standard)
+[![Total Downloads](https://poser.pugx.org/cdn77/coding-standard/d/total.svg)](https://packagist.org/packages/cdn77/coding-standard)
 
 Based on Doctrine Coding Standard https://github.com/doctrine/coding-standard
 

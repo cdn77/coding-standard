@@ -88,6 +88,7 @@
             </property>
         </properties>
     </rule>
+    <rule ref="SlevomatCodingStandard.Classes.ReadonlyClass" />
     <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion" />
     <rule ref="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing">
         <properties>

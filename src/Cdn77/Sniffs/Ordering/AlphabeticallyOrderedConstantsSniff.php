@@ -33,25 +33,25 @@ use const T_WHITESPACE;
  * @phpstan-type TypeNameValueShape array{
  *       type: TypeShape|null,
  *       name: NameShape,
- *       value: ValueShape
+ *       value: ValueShape,
  *  }
  * @phpstan-type TypeNameShape array{
  *       type: TypeShape|null,
- *       name: NameShape
+ *       name: NameShape,
  *  }
  * @phpstan-type TypeShape array{
  *       content: string,
- *       ptr: int
+ *       ptr: int,
  *  }
  * @phpstan-type NameShape array{
  *       content: string,
  *       lowercaseContent: string,
- *       ptr: int
+ *       ptr: int,
  *  }
  * @phpstan-type ValueShape array{
  *       content: string,
  *       startPtr: int,
- *       endPtr: int
+ *       endPtr: int,
  *  }
  */
 final class AlphabeticallyOrderedConstantsSniff implements Sniff
